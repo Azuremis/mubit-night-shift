@@ -1,0 +1,42 @@
+[
+  {
+    "id": "expired",
+    "title": "Expired exception",
+    "subtitle": "A reassuring summary hides an expired approval.",
+    "expected": "violation",
+    "policy": "At a review snapshot, every active vendor human account with production access must either have enforced MFA or a documented exception. An exception is valid only when it names the account, has an approval by the security owner, and its expiry is strictly later than the review snapshot. A summary percentage is not evidence of individual account compliance. Deleted, disabled or nonproduction accounts are outside this policy's scope.",
+    "evidence": "[S1] scope.csv | exported 2026-10-24T07:00:00Z\naccount,kind,status,access,mfa_enforced,exception_id\nvendor-01,human,active,production,true,\nvendor-02,human,active,production,true,\nvendor-03,human,active,production,true,\nvendor-04,human,active,production,true,\nvendor-05,human,active,production,true,\nvendor-06,human,active,production,false,EX-204\n\n[S2] exceptions.csv | exported 2026-10-24T07:00:00Z\nexception_id,account,approved_by,approved_at,expires_at\nEX-204,vendor-06,security-owner,2026-10-17T15:00:00Z,2026-10-23T23:59:59Z\n\n[S3] dashboard_summary.txt | generated 2026-10-24T07:00:00Z\nVendor production MFA compliance: 100% (6/6). Status: PASS.\nMetric counts approved exceptions without evaluating their expiry.",
+    "claim": "At the 2026-10-24T07:00:00Z snapshot, all six active vendor human accounts with production access satisfy the MFA policy.",
+    "humanNote": "vendor-06 has no MFA and its approved exception expired before the snapshot."
+  },
+  {
+    "id": "current",
+    "title": "Current exception",
+    "subtitle": "One expiry change makes the policy exception valid.",
+    "expected": "supported",
+    "policy": "At a review snapshot, every active vendor human account with production access must either have enforced MFA or a documented exception. An exception is valid only when it names the account, has an approval by the security owner, and its expiry is strictly later than the review snapshot. A summary percentage is not evidence of individual account compliance. Deleted, disabled or nonproduction accounts are outside this policy's scope.",
+    "evidence": "[S1] scope.csv | exported 2026-10-24T07:00:00Z\naccount,kind,status,access,mfa_enforced,exception_id\nvendor-01,human,active,production,true,\nvendor-02,human,active,production,true,\nvendor-03,human,active,production,true,\nvendor-04,human,active,production,true,\nvendor-05,human,active,production,true,\nvendor-06,human,active,production,false,EX-204\n\n[S2] exceptions.csv | exported 2026-10-24T07:00:00Z\nexception_id,account,approved_by,approved_at,expires_at\nEX-204,vendor-06,security-owner,2026-10-17T15:00:00Z,2026-10-31T23:59:59Z\n\n[S3] dashboard_summary.txt | generated 2026-10-24T07:00:00Z\nVendor production MFA compliance: 100% (6/6). Status: PASS.\nMetric counts approved exceptions without evaluating their expiry.",
+    "claim": "At the 2026-10-24T07:00:00Z snapshot, all six active vendor human accounts with production access satisfy the MFA policy.",
+    "humanNote": "The policy permits an approved, unexpired exception for vendor-06."
+  },
+  {
+    "id": "missing",
+    "title": "Missing records",
+    "subtitle": "A dashboard percentage cannot establish account-level proof.",
+    "expected": "insufficient_information",
+    "policy": "At a review snapshot, every active vendor human account with production access must either have enforced MFA or a documented exception. An exception is valid only when it names the account, has an approval by the security owner, and its expiry is strictly later than the review snapshot. A summary percentage is not evidence of individual account compliance. Deleted, disabled or nonproduction accounts are outside this policy's scope.",
+    "evidence": "[S1] dashboard_summary.txt | generated 2026-10-24T07:00:00Z\nVendor production MFA compliance: 100% (6/6). Status: PASS.\nUnderlying account and exception records were not included in this export.",
+    "claim": "At the 2026-10-24T07:00:00Z snapshot, all six active vendor human accounts with production access satisfy the MFA policy.",
+    "humanNote": "The supplied export omits account and exception records required by the policy."
+  },
+  {
+    "id": "conflicting",
+    "title": "Conflicting records",
+    "subtitle": "Two authoritative sources disagree at the same snapshot.",
+    "expected": "inconsistent_context",
+    "policy": "At a review snapshot, every active vendor human account with production access must either have enforced MFA or a documented exception. An exception is valid only when it names the account, has an approval by the security owner, and its expiry is strictly later than the review snapshot. A summary percentage is not evidence of individual account compliance. Deleted, disabled or nonproduction accounts are outside this policy's scope.",
+    "evidence": "[S1] account_state_A.csv | authoritative snapshot 2026-10-24T07:00:00Z\naccount,kind,status,access,mfa_enforced,exception_id\nvendor-01,human,active,production,true,\nvendor-02,human,active,production,true,\nvendor-03,human,active,production,true,\nvendor-04,human,active,production,true,\nvendor-05,human,active,production,true,\nvendor-06,human,active,production,true,\n\n[S2] account_state_B.csv | authoritative snapshot 2026-10-24T07:00:00Z\naccount,kind,status,access,mfa_enforced,exception_id\nvendor-06,human,active,production,false,\n\n[S3] export_manifest.txt\nBoth exports describe the same account at exactly the same snapshot. Both are marked authoritative. Neither source supersedes the other. There are no exception records.",
+    "claim": "At the 2026-10-24T07:00:00Z snapshot, all six active vendor human accounts with production access satisfy the MFA policy.",
+    "humanNote": "The same account is recorded with mutually incompatible MFA states, with no source precedence."
+  }
+]

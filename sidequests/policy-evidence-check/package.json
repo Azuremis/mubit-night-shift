@@ -1,0 +1,12 @@
+{
+  "name": "policy-evidence-check",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local synthetic policy verification with Banyan Sapling and inspectable receipts",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

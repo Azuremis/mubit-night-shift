@@ -1,0 +1,12 @@
+{
+  "purpose": "authorized synthetic smoke request",
+  "endpoint": "https://6adbee0669a00298cd4774c9.endpoints.huggingface.cloud",
+  "http_status": 200,
+  "duration_seconds": 1.453539,
+  "recorded_at": "2026-10-24T07:42:48Z",
+  "inference_call_number": 1,
+  "request_file": "00-smoke.request.json",
+  "response_file": "00-smoke.response.json",
+  "source": "owner-supplied API Quickstart relayed by parent",
+  "retry_count": 0
+}

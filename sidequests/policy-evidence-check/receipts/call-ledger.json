@@ -1,0 +1,35 @@
+{
+  "limit": 7,
+  "calls": [
+    {
+      "callNumber": 1,
+      "receiptId": "receipt-01-smoke",
+      "createdAt": "2026-10-24T07:42:46Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 2,
+      "receiptId": "receipt-02-4a771ae5",
+      "createdAt": "2026-10-24T07:48:16.397Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 3,
+      "receiptId": "receipt-03-84eb50e0",
+      "createdAt": "2026-10-24T07:48:17.932Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 4,
+      "receiptId": "receipt-04-dc9da390",
+      "createdAt": "2026-10-24T07:48:19.154Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 5,
+      "receiptId": "receipt-05-8da8abe2",
+      "createdAt": "2026-10-24T07:48:20.311Z",
+      "outcome": "success"
+    }
+  ]
+}

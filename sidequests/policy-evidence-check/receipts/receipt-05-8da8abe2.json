@@ -1,0 +1,62 @@
+{
+  "id": "receipt-05-8da8abe2",
+  "callNumber": 5,
+  "createdAt": "2026-10-24T07:48:20.311Z",
+  "fixtureId": "conflicting",
+  "request": {
+    "inputs": {
+      "policy": "At a review snapshot, every active vendor human account with production access must either have enforced MFA or a documented exception. An exception is valid only when it names the account, has an approval by the security owner, and its expiry is strictly later than the review snapshot. A summary percentage is not evidence of individual account compliance. Deleted, disabled or nonproduction accounts are outside this policy's scope.",
+      "evidence": "[S1] account_state_A.csv | authoritative snapshot 2026-10-24T07:00:00Z\naccount,kind,status,access,mfa_enforced,exception_id\nvendor-01,human,active,production,true,\nvendor-02,human,active,production,true,\nvendor-03,human,active,production,true,\nvendor-04,human,active,production,true,\nvendor-05,human,active,production,true,\nvendor-06,human,active,production,true,\n\n[S2] account_state_B.csv | authoritative snapshot 2026-10-24T07:00:00Z\naccount,kind,status,access,mfa_enforced,exception_id\nvendor-06,human,active,production,false,\n\n[S3] export_manifest.txt\nBoth exports describe the same account at exactly the same snapshot. Both are marked authoritative. Neither source supersedes the other. There are no exception records.",
+      "claim": "At the 2026-10-24T07:00:00Z snapshot, all six active vendor human accounts with production access satisfy the MFA policy."
+    }
+  },
+  "provenance": {
+    "endpoint": "https://6adbee0669a00298cd4774c9.endpoints.huggingface.cloud",
+    "source": "Owner-supplied Banyan Sapling API Quickstart",
+    "attempts": 1
+  },
+  "outcome": "success",
+  "response": {
+    "model": "banyan-sapling",
+    "release_stage": "research-preview",
+    "source_release_sha256": "245970b0e5b0b22d64c1434ee21dd221b1f211f06bda5465f8fc108f70cd5c3f",
+    "weights_sha256": "103a67f7a112589346c3e1090f5bca182d7fdafee85dfd43e67ac5d75eb04dd4",
+    "logits": [
+      -21.4412784576416,
+      -16.505077362060547,
+      -18.964555740356445,
+      33.1943244934082
+    ],
+    "conformal_prediction_set": [
+      "inconsistent_context"
+    ],
+    "prediction_set": [
+      "inconsistent_context"
+    ],
+    "status": "inconsistent_context",
+    "raw_label": "inconsistent_context",
+    "fallback_used": false,
+    "fallback_reason": null,
+    "status_provenance": "conformal_singleton",
+    "empty_set_policy": "rounded_argmax",
+    "conformal_singleton": true,
+    "probabilities": {
+      "supported": 0.000025810619065981548,
+      "violation": 0.00006703885763196595,
+      "insufficient_information": 0.000041666457539293295,
+      "inconsistent_context": 0.9998654840657627
+    },
+    "usage": {
+      "input_tokens": 382,
+      "generated_tokens": 0
+    },
+    "timing_ms": {
+      "model": 1103.1182789993181
+    }
+  },
+  "transport": {
+    "httpStatus": 200,
+    "durationMs": 1195
+  },
+  "completedAt": "2026-10-24T07:48:21.507Z"
+}

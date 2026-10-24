@@ -1,0 +1,68 @@
+{
+  "id": "receipt-04-dc9da390",
+  "callNumber": 4,
+  "createdAt": "2026-10-24T07:48:19.154Z",
+  "fixtureId": "missing",
+  "request": {
+    "inputs": {
+      "policy": "At a review snapshot, every active vendor human account with production access must either have enforced MFA or a documented exception. An exception is valid only when it names the account, has an approval by the security owner, and its expiry is strictly later than the review snapshot. A summary percentage is not evidence of individual account compliance. Deleted, disabled or nonproduction accounts are outside this policy's scope.",
+      "evidence": "[S1] dashboard_summary.txt | generated 2026-10-24T07:00:00Z\nVendor production MFA compliance: 100% (6/6). Status: PASS.\nUnderlying account and exception records were not included in this export.",
+      "claim": "At the 2026-10-24T07:00:00Z snapshot, all six active vendor human accounts with production access satisfy the MFA policy."
+    }
+  },
+  "provenance": {
+    "endpoint": "https://6adbee0669a00298cd4774c9.endpoints.huggingface.cloud",
+    "source": "Owner-supplied Banyan Sapling API Quickstart",
+    "attempts": 1
+  },
+  "outcome": "success",
+  "response": {
+    "model": "banyan-sapling",
+    "release_stage": "research-preview",
+    "source_release_sha256": "245970b0e5b0b22d64c1434ee21dd221b1f211f06bda5465f8fc108f70cd5c3f",
+    "weights_sha256": "103a67f7a112589346c3e1090f5bca182d7fdafee85dfd43e67ac5d75eb04dd4",
+    "logits": [
+      -4.409679889678955,
+      -3.617450475692749,
+      7.936579704284668,
+      -10.460977554321289
+    ],
+    "conformal_prediction_set": [
+      "supported",
+      "violation",
+      "insufficient_information",
+      "inconsistent_context"
+    ],
+    "prediction_set": [
+      "supported",
+      "violation",
+      "insufficient_information",
+      "inconsistent_context"
+    ],
+    "status": "unsure",
+    "raw_label": "insufficient_information",
+    "fallback_used": false,
+    "fallback_reason": null,
+    "status_provenance": "multiple_conformal_labels",
+    "empty_set_policy": "rounded_argmax",
+    "conformal_singleton": false,
+    "probabilities": {
+      "supported": 0.07484881780485168,
+      "violation": 0.08723969270228657,
+      "insufficient_information": 0.8146833668451241,
+      "inconsistent_context": 0.023228122647737624
+    },
+    "usage": {
+      "input_tokens": 231,
+      "generated_tokens": 0
+    },
+    "timing_ms": {
+      "model": 1053.9392859973304
+    }
+  },
+  "transport": {
+    "httpStatus": 200,
+    "durationMs": 1147
+  },
+  "completedAt": "2026-10-24T07:48:20.303Z"
+}

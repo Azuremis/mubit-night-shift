@@ -1,0 +1,23 @@
+# Existing local session data and private research: never publish.
+/model-card-clean/
+/research/
+
+# Local agent settings, credentials, and environment state.
+.agents/
+.codex/
+.aws/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+
+# Runtime, dependencies, and local outputs.
+node_modules/
+*.log
+*.tmp
+.DS_Store
+coverage/
+.local/

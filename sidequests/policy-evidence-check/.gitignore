@@ -1,0 +1,25 @@
+node_modules/
+*.log
+.DS_Store
+receipts/*.tmp
+
+# Publish only the individually reviewed synthetic run artifacts.
+receipts/*
+!receipts/00-smoke.headers.txt
+!receipts/00-smoke.meta.json
+!receipts/00-smoke.request.json
+!receipts/00-smoke.response.json
+!receipts/call-ledger.json
+!receipts/receipt-01-smoke.json
+!receipts/receipt-02-4a771ae5.json
+!receipts/receipt-03-84eb50e0.json
+!receipts/receipt-04-dc9da390.json
+!receipts/receipt-05-8da8abe2.json
+
+# Future captures require a separate review before adding an exception.
+screenshots/*
+!screenshots/conflicting-desktop.jpg
+!screenshots/conflicting-mobile-result.jpg
+!screenshots/conflicting-mobile.jpg
+!screenshots/conflicting-result.jpg
+!screenshots/expired-desktop.jpg

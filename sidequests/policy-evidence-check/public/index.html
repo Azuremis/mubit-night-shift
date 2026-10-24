@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123f38">
+  <title>Policy Evidence Check · Banyan Sapling</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Policy Evidence Check home"><span class="brand-mark" aria-hidden="true">✓</span> Evidence Check</a>
+      <span class="model-pill"><span class="dot"></span> Banyan Sapling <span class="preview">research preview</span></span>
+    </header>
+    <main>
+      <section class="intro">
+        <div><p class="eyebrow">POLICY → EVIDENCE → VERIFICATION</p><h1>A claim is only as strong<br>as its evidence.</h1><p class="lede">Check the records behind a security claim.<br>Sapling returns a calibrated status, including when it is unsure.</p></div>
+        <div class="context-card"><span class="context-icon" aria-hidden="true">↳</span><div><strong>Vendor access review</strong><p>Six accounts. One policy. <br>Look past the “100% compliant” summary.</p><span class="synthetic-tag">SYNTHETIC DEMO DATA</span></div></div>
+      </section>
+
+      <section class="case-selector" aria-label="Synthetic review cases">
+        <div class="section-label"><span>01 / CHOOSE A CASE</span><span>Same policy. Different evidence.</span></div>
+        <div id="fixture-buttons" class="fixture-buttons"></div>
+      </section>
+
+      <div class="workspace">
+        <section class="input-panel panel" aria-labelledby="input-heading">
+          <div class="panel-heading"><div><p class="eyebrow">REVIEW INPUT</p><h2 id="input-heading">The claim & its records</h2></div><span id="source-count" class="small-tag">3 sources</span></div>
+          <form id="verify-form">
+            <label for="policy"><span class="field-name">Policy</span><span class="field-hint">The rule to apply</span></label>
+            <textarea id="policy" name="policy" rows="5" required spellcheck="false"></textarea>
+            <label for="claim"><span class="field-name">Claim</span><span class="field-hint">What needs to hold true</span></label>
+            <textarea id="claim" name="claim" rows="3" required spellcheck="false"></textarea>
+            <label for="evidence"><span class="field-name">Evidence</span><span class="field-hint">Exact source records sent to Sapling</span></label>
+            <textarea id="evidence" name="evidence" rows="13" required spellcheck="false"></textarea>
+            <div class="form-footer"><span id="input-size">0 characters</span><span>Provider limit: 16,384 tokens</span></div>
+            <button type="submit" id="verify-button" class="verify-button">Verify with Sapling <span aria-hidden="true">↗</span></button>
+            <p id="request-note" class="request-note">Each click sends one request. No automatic retries.</p>
+          </form>
+          <details class="human-reference"><summary>Human reference for this synthetic case</summary><p id="human-note"></p><p class="muted">Fixture-author expectation, separate from Sapling's output.</p></details>
+        </section>
+
+        <section class="result-panel panel" aria-labelledby="result-heading" aria-live="polite" aria-atomic="false">
+          <div class="panel-heading"><div><p class="eyebrow">SAPLING OUTPUT</p><h2 id="result-heading">Verification result</h2></div><span id="run-badge" class="run-badge">READY</span></div>
+          <div id="result-content" class="result-content"><div class="empty-state"><div class="empty-icon" aria-hidden="true">⌁</div><h3>Read the records. Then verify.</h3><p>Select a case and run Sapling, or inspect a saved live receipt when available.</p></div></div>
+        </section>
+      </div>
+
+      <section class="source-panel panel" aria-labelledby="sources-heading">
+        <div class="panel-heading"><div><p class="eyebrow">SOURCE-BOUND REVIEW</p><h2 id="sources-heading">The records you supplied</h2></div><p class="source-disclaimer">Shown verbatim. These are inputs, not model citations.</p></div>
+        <div id="source-cards" class="source-cards"></div>
+      </section>
+      <footer class="page-footer"><span>Built for the Mubit Policy Challenge · Synthetic data only</span><span id="budget-label">Loading local service…</span></footer>
+      <p id="app-error" class="app-error" role="alert" hidden></p>
+    </main>
+  </div>
+</body>
+</html>
