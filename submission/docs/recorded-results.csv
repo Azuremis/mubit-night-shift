@@ -1,0 +1,13 @@
+call,receipt,fixture,case,human_reference,status,raw_label,prediction_set_size,model_ms,http_status,round_trip_ms
+1,receipt-01-smoke,smoke,Small MFA smoke,supported,unsure,supported,4,981.4,200,1454
+2,receipt-02-4a771ae5,expired,Expired exception,violation,unsure,violation,4,1119.0,200,1524
+3,receipt-03-84eb50e0,current,Current exception,supported,unsure,insufficient_information,4,1116.0,200,1213
+4,receipt-04-dc9da390,missing,Missing records,insufficient_information,unsure,insufficient_information,4,1053.9,200,1147
+5,receipt-05-8da8abe2,conflicting,Conflicting records,inconsistent_context,inconsistent_context,inconsistent_context,1,1103.1,200,1195
+6,receipt-06-5eccb84f,php-rollout-only,PHP: Rollout only,insufficient_information,unsure,insufficient_information,4,1091.9,200,1479
+7,receipt-07-2b877d47,php-bound-backport,PHP: Bound backport,supported,unsure,violation,4,1099.5,200,1199
+8,receipt-08-2c178f30,php-customer-vps,PHP: Customer VPS,insufficient_information,unsure,violation,4,1094.4,200,1183
+9,receipt-09-7526370d,deployment-approved,Approval and passing tests,supported,unsure,supported,4,1033.0,200,1416
+10,receipt-10-57703127,deployment-rejected,Explicit rejection,violation,violation,violation,1,1028.9,200,1120
+11,receipt-11-40fdad1a,deployment-missing-approval,Missing approval,insufficient_information,unsure,violation,4,1023.5,200,1112
+12,receipt-12-4b4880cc,deployment-conflicting-approvals,Contradictory approvals,inconsistent_context,inconsistent_context,inconsistent_context,1,1038.6,200,1128

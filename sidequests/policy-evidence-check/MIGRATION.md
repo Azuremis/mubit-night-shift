@@ -17,6 +17,6 @@ Every sidequest text file was reviewed for credentials, private paths and person
 
 ## Verification
 
-Use `npm test` from this directory for ten mocked tests: the original eight plus two regression checks for the bounded Astra review findings. Selecting fixtures and viewing saved receipts requires no inference. Migration itself consumed no calls. The owner later approved exactly three PHP attempts after the original five; all eight are now recorded and the budget is exhausted. The original entries were preserved. See `VALIDATION.md` for review fixes and follow-up evidence.
+Use `npm test` from this directory for ten mocked tests: the original eight plus two regression checks for the bounded Astra review findings. Selecting fixtures and viewing saved receipts requires no inference. Migration itself consumed no calls. The owner later approved exactly three PHP attempts after the original five, followed by four predeclared deployment attempts. All twelve are now recorded and the budget is exhausted. Original entries and receipt bytes were preserved. The deployment-primary UI reuses those saved results without additional calls. See `VALIDATION.md` for review fixes and follow-up evidence.
 
 No source files were deleted. No social/Discord submission or rule acceptance was performed.

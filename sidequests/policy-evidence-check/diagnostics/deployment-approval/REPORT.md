@@ -15,7 +15,7 @@ All four requests returned HTTP 200, `model: banyan-sapling`, `fallback_used: fa
 
 This is a stronger bounded example than the PHP cases: it demonstrates two distinct calibrated stop conditions, an explicit policy rejection and mutually inconsistent approval records. A candidate problem is reviewing a release evidence packet before deployment and identifying those stop conditions. The app itself does not enforce a deployment gate or deploy anything.
 
-The approved case did not yield a calibrated supported verdict, and missing approval did not yield its expected raw class. Therefore these results do not demonstrate reliable approval automation or four-class accuracy. A defensible demo shows rejected → conflicting → approved-but-unsure, openly retaining human review for the latter. Any active UI/story pivot remains with the parent decision.
+The approved case did not yield a calibrated supported verdict, and missing approval did not yield its expected raw class. Therefore these results do not demonstrate reliable approval automation or four-class accuracy. A defensible demo shows rejected → conflicting → approved-but-unsure, openly retaining human review for the latter. The parent subsequently approved this narrow story and the corresponding primary UI integration; the original results remain unchanged.
 
 ## Returned calibration metadata
 
@@ -23,6 +23,6 @@ Rejection and contradiction returned `status_provenance: conformal_singleton`, `
 
 ## Budget and scope
 
-The approved expansion was four attempts after the original eight, for a global total of **12/12**, now exhausted. This directory's ledger carries forward the eight earlier entries by reference and holds the four new entries; the original eight receipt files remain in the primary receipts directory. Do not add the two ledger counts together. The active app's original eight-of-eight ledger, seven fixtures, server and UI were unchanged by this diagnostic.
+The approved expansion was four attempts after the original eight, for a global total of **12/12**, now exhausted. This directory's ledger carries forward the eight earlier entries by reference and holds the four new entries. Do not add the two ledger counts together. At diagnostic completion, the active app's original eight-of-eight ledger, seven fixtures, server and UI were unchanged. After the parent's integration decision, all twelve entries and exact receipt copies became available in the primary UI, with four primary cases and seven historical cases. That integration made no additional provider requests.
 
 Frozen fixture hashing, exact receipt/input matching, ledger counts and a credential/private-path scan passed. All data is synthetic. Other workers' deployment and submission files were not modified. The runner refuses to rerun once any new diagnostic attempt has been reserved.

@@ -1,45 +1,43 @@
-# Policy Evidence Check — 100-second demo
+# Policy Evidence Check — release-evidence demo
 
-Use the local app at http://127.0.0.1:4321, or port 4322 if the original build server occupies 4321. The app's saved-live-run label must remain visible when replaying receipts. All eight authorized calls are recorded and the budget is exhausted; replay saved receipts only.
+Use the stable local app at http://127.0.0.1:4322 (or port 4321 when starting a fresh server there). This is playback of actual saved Sapling responses, not new live inference. All twelve authorized attempts are used; Verify is disabled. Keep the saved-run badge visible.
 
-## 0–15 seconds: problem and actual integration
+## 0–15 seconds: the review problem
 
-“Security reviews often arrive with a reassuring summary. This app sends the actual policy, claim and source records to Banyan Sapling. These vendor accounts are synthetic. Sapling does the semantic verification; the app preserves its uncertainty and its exact response.”
+“Before a release, someone needs to check that the evidence actually permits it. This demo compares a deployment policy, a permission claim and a synthetic release packet. Banyan Sapling returns the calibrated result; this app keeps the exact request and response beside the record. It does not control deployment.”
 
-Show the whole screen and case buttons.
+## 15–40 seconds: explicit rejection
 
-## 15–40 seconds: calibrated inconsistency
+Open **Explicit rejection**. Show that tests passed but the release approver rejected r-42.
 
-Select **Conflicting records**. Show the two authoritative exports at the same snapshot: vendor-06 has MFA true in one and false in the other, with neither source superseding the other.
+“The claim says this release is permitted. Passing tests do not override the rejection. The actual Sapling response is a calibrated violation with a singleton prediction set. That is a stop condition for the review.”
 
-“The live Sapling response identified inconsistent context with a singleton prediction set. The result is saved with its inputs, timestamp, HTTP status, model timing and the model's reported weights hash.”
+## 40–65 seconds: conflicting approvals
 
-Show the saved-live-run label, calibrated status, prediction set and provenance. The returned class probability was approximately 99.9865%; do not describe that as independently established correctness.
+Select **Conflicting approvals**. Show approval and rejection at the same time, with equal authority and no precedence.
 
-## 40–65 seconds: a misleading summary does not become a pass
+“The packet contains two incompatible approval records. Sapling returned calibrated inconsistent context with a singleton prediction set. Resolve the records before deciding to release.”
 
-Select **Expired exception**. Show the 100% summary and EX-204 expiry before the snapshot.
+## 65–85 seconds: disclose the boundary
 
-“The raw classifier leans toward violation. But the calibrated status is unsure, so this is a human-review case. The app leads with that status instead of automatically passing or failing the claim.”
+Select **Approved · human review**.
 
-## 65–85 seconds: honest limitation
+“This packet has approval and passing tests, so our predeclared reference was supported. Sapling still returned unsure. The raw supported label is secondary; the app requests human review. This demo shows two calibrated stop conditions, not reliable approval automation.”
 
-Select **Current exception**, then **Missing records**.
+## 85–105 seconds: inspect the evidence
 
-“Changing the expiry alone did not produce the supported result we expected. Missing records also remain unsure. These are the real outputs, not rewritten answers. Sapling supplies labels and scores, not explanations or external source verification.”
+Open **Inspect exact request & raw response**. Show the receipt timestamp, model, HTTP status, one attempt, prediction set and provider-reported provenance. Optionally show **Missing approval**, which also remained unsure and had an unexpected raw violation label.
 
-## 85–100 seconds: inspectable evidence
+“Four cases used the same policy and claim, with references frozen before the calls. Every response is preserved, including the failures. Earlier MFA and PHP cases remain in Historical examples. The useful boundary here is detecting explicit rejection and conflicting approval evidence while keeping unresolved cases with a reviewer.”
 
-Open **Inspect exact request & raw response** on the conflicting-records case.
+End with the shared repository URL: https://github.com/Azuremis/mubit-night-shift. Social publication and challenge submission remain separate actions.
 
-“Every result can be checked against the exact request and downloaded as JSON. This is an evidence review aid: detect contradictory context, retain uncertainty, and keep the source records beside the decision.”
+## Capture notes
 
-End on the actual result. The owner has authorized the shared public hackathon repository. Social/Discord submission and rule acceptance remain separate actions.
-
-## Screenshots
-
-The screenshot set is an alternative challenge deliverable to a video, subject to the parent confirming the challenge's final submission format. Captures show the app displaying saved responses from actual endpoint calls; they are not fresh inference at capture time. Use the conflicting-records and expired-exception screenshots together so the uncertainty behavior is visible.
-
-## Optional PHP follow-up
-
-Select the three PHP cases to compare a fleet announcement, an invented asset-bound backport observation and a customer-managed VPS outside the rollout. Scope the narration to CVE-2026-109618. All actual calibrated results are unsure; the backport and VPS raw labels are violation. Explain that the backport case failed its human expectation, and do not turn a missing-proof case or secondary raw label into a claim about a real compromised website. `PHP_HOSTING_CASES.md` records sources and limits.
+- Primary inputs: fixtures.json, first four entries. Historical cases follow.
+- Rejected receipt: receipts/receipt-10-57703127.json.
+- Conflict receipt: receipts/receipt-12-4b4880cc.json.
+- Approved-but-unsure receipt: receipts/receipt-09-7526370d.json.
+- Missing-approval receipt: receipts/receipt-11-40fdad1a.json.
+- Exact predeclared diagnostic: diagnostics/deployment-approval/.
+- Original screenshots show historical MFA/PHP UI; current release-evidence captures are produced by the submission/video worker.

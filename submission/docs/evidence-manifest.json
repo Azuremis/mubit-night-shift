@@ -1,0 +1,48 @@
+{
+  "team": "SamuraiFlow",
+  "evidence_date": "2026-10-24",
+  "app_baseline_commit": "8889f08d3ed439d040a22b750d46adf4d970862a",
+  "diagnostic_results_commit": "42354a3db7b443bdbef64e1617f13df41f7f2c2b",
+  "repository": "https://github.com/Azuremis/mubit-night-shift",
+  "live_attempts": 12,
+  "calibrated_unsure": 9,
+  "calibrated_violation": 1,
+  "calibrated_inconsistent_context": 2,
+  "new_provider_calls_for_docs": 0,
+  "mocked_server_tests": {
+    "passed": 10,
+    "failed": 0
+  },
+  "public_application_url": null,
+  "video_url": null,
+  "registration": {
+    "state": "owner_reported_complete",
+    "reported_at": "2026-10-24T08:22:00Z",
+    "scope": "team created/joined and rules accepted; check-in and final submission not established"
+  },
+  "source_files": {
+    "sidequests/policy-evidence-check/fixtures.json": "62d829fa052ad4ca18d609d59b2cad0cabbb3cc65e024640fe31ff52de545e87",
+    "sidequests/policy-evidence-check/receipts/call-ledger.json": "cbb1b7d1b5cd24dd0863086fd54fe29f4a53d1a33a43fca447e4ca281f8888e7",
+    "sidequests/policy-evidence-check/sources/php-hosting.json": "d1f526411c233a09ad232c9def408eebbfebe5d047460a75e9eed50eb1b0565b",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/fixtures.json": "9b36f1c2df9181aacf670d3743285ee789535b7351d3ff8f896fd0a567e65179",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/predeclared.json": "30e62303b244070ceecd89350157087c3019ab4b862a52f79aa48ec44fd7612b",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/results.json": "e62c7e283a6de16df11824e04c53452be16648de775f1c0a451dbdc3a0da77aa",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/receipts/call-ledger.json": "aaa9f585cc6aa434c80e015e13a0fc45064fe401311657f020d400b6eae4424e",
+    "sidequests/policy-evidence-check/receipts/receipt-01-smoke.json": "f167e3b14e6228cf4acb8f3e3c38978681d20ab3ef2541ef8831f68b48e1d087",
+    "sidequests/policy-evidence-check/receipts/receipt-02-4a771ae5.json": "be6c64606c8656d720e86da7a56347236ff01c67baf9e8cfe1e84016e8352fd6",
+    "sidequests/policy-evidence-check/receipts/receipt-03-84eb50e0.json": "93e3c795ead9b2ec65c8e0a5a5e0b6babf2409700cf1e8b9b9320cb05bbe5092",
+    "sidequests/policy-evidence-check/receipts/receipt-04-dc9da390.json": "3332baa65ae63b0d0eb5cb2b41484292275c781bf656fc7b4927fa300f2d1337",
+    "sidequests/policy-evidence-check/receipts/receipt-05-8da8abe2.json": "6c58eae37cebbf506f83b8b29466122e016f09047280be57f7c1e013d3704eea",
+    "sidequests/policy-evidence-check/receipts/receipt-06-5eccb84f.json": "53a9991fa8915676eba23171fe496fa88add2df484ef8ae0861157c4956b28e5",
+    "sidequests/policy-evidence-check/receipts/receipt-07-2b877d47.json": "6f5209304145d02d2f37051db3859d5efecf677e002e700773ef2fb979cf5428",
+    "sidequests/policy-evidence-check/receipts/receipt-08-2c178f30.json": "dafa1ecc21029e6a3df92ab51e6016d71d35e8839dc2a1ec95f431b0924b1d6d",
+    "sidequests/policy-evidence-check/receipts/receipt-09-7526370d.json": "79856a5ff06f3afae0f2c1ec70c54102a6ce6e318810c3ccef31a2fbb397fc51",
+    "sidequests/policy-evidence-check/receipts/receipt-10-57703127.json": "ab30d35fb6b4ef844e142cc4ff86d76ccc6b288bcaf7eddae9ad0c3415f171e4",
+    "sidequests/policy-evidence-check/receipts/receipt-11-40fdad1a.json": "26fd1bff5563731b46aca2e240339cf6041c20c492b183e7e47e760d58ee9ac1",
+    "sidequests/policy-evidence-check/receipts/receipt-12-4b4880cc.json": "e0fa8a3fc72825ca7d420286a9eb3bda1663be655af68c102223231ecf52c1cc",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/receipts/receipt-09-7526370d.json": "79856a5ff06f3afae0f2c1ec70c54102a6ce6e318810c3ccef31a2fbb397fc51",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/receipts/receipt-10-57703127.json": "ab30d35fb6b4ef844e142cc4ff86d76ccc6b288bcaf7eddae9ad0c3415f171e4",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/receipts/receipt-11-40fdad1a.json": "26fd1bff5563731b46aca2e240339cf6041c20c492b183e7e47e760d58ee9ac1",
+    "sidequests/policy-evidence-check/diagnostics/deployment-approval/receipts/receipt-12-4b4880cc.json": "e0fa8a3fc72825ca7d420286a9eb3bda1663be655af68c102223231ecf52c1cc"
+  }
+}

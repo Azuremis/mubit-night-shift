@@ -1,5 +1,5 @@
 {
-  "limit": 8,
+  "limit": 12,
   "calls": [
     {
       "callNumber": 1,
@@ -48,6 +48,30 @@
       "receiptId": "receipt-08-2c178f30",
       "createdAt": "2026-10-24T08:13:36.206Z",
       "outcome": "success"
+    },
+    {
+      "callNumber": 9,
+      "receiptId": "receipt-09-7526370d",
+      "createdAt": "2026-10-24T08:29:36.231Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 10,
+      "receiptId": "receipt-10-57703127",
+      "createdAt": "2026-10-24T08:29:37.674Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 11,
+      "receiptId": "receipt-11-40fdad1a",
+      "createdAt": "2026-10-24T08:29:38.803Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 12,
+      "receiptId": "receipt-12-4b4880cc",
+      "createdAt": "2026-10-24T08:29:39.921Z",
+      "outcome": "success"
     }
   ],
   "authorizations": [
@@ -62,6 +86,25 @@
         "php-bound-backport",
         "php-customer-vps"
       ]
+    },
+    {
+      "date": "2026-10-24",
+      "prior_used": 8,
+      "additional_attempts": 4,
+      "total_limit": 12,
+      "scope": "One attempt per predeclared deployment diagnostic fixture, no retries/tuning; active UI unchanged",
+      "fixture_ids": [
+        "deployment-approved",
+        "deployment-rejected",
+        "deployment-missing-approval",
+        "deployment-conflicting-approvals"
+      ]
     }
-  ]
+  ],
+  "imported_diagnostic": {
+    "path": "diagnostics/deployment-approval/",
+    "frozen_fixture_sha256": "9b36f1c2df9181aacf670d3743285ee789535b7351d3ff8f896fd0a567e65179",
+    "prior_primary_ledger_sha256": "856b0116cd498c05877704a4ab66e4b283e7da88592a57aa9ac29b085dca9dee",
+    "note": "Calls 9\u201312 copied unchanged into primary receipts after the approved UI integration; diagnostic copies preserve the original record."
+  }
 }

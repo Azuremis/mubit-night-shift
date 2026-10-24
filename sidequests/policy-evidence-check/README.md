@@ -1,8 +1,19 @@
 # Policy Evidence Check
 
-A local security-review demo using **actual Banyan Sapling inference**. It checks a policy, a claim and synthetic source records, then displays the calibrated status, prediction set, secondary raw label and class scores. Every run has an inspectable JSON receipt.
+A local release-evidence review demo using **actual Banyan Sapling inference**. It checks a release policy, a permission claim and synthetic approval/test records, then displays calibrated status, prediction set, secondary raw label and class scores. Every run has an inspectable JSON receipt. It is a review aid with no deployment control.
 
-The semantic task: distinguish policy exceptions, missing proof, contradictory records and vulnerability-specific hosting remediation evidence. Seven fixtures include the four original MFA cases and three PHP cases with invented website records and dated public advisories. Sapling returns labels and scores; this app does not generate explanations or independently verify source authenticity.
+The primary task is identifying explicit rejection and contradictory approval evidence before release. Four predeclared deployment cases share one policy and claim. Seven earlier MFA/PHP fixtures remain under **Historical examples**, including their failed expectations and uncertain outputs. Sapling returns labels and scores; the app's review guidance is application-authored, not a model-generated explanation or an independent source-authenticity check.
+
+## Primary release examples — actual results
+
+| Case | Human reference | Calibrated status | Prediction set | Raw label |
+| --- | --- | --- | --- | --- |
+| Explicit rejection | violation | **violation** | violation only | violation |
+| Conflicting approvals | inconsistent_context | **inconsistent_context** | inconsistent_context only | inconsistent_context |
+| Approval plus passing tests | supported | unsure | All four labels | supported |
+| Missing approval | insufficient_information | unsure | All four labels | violation |
+
+The first two are demonstrated calibrated stop conditions. The positive case remains unsure, so these results do not establish reliable approval automation or four-class accuracy. Keep that limitation visible. The interface starts on rejection, then presents conflict and approved-but-unsure for the demo. Inputs and human references were committed before calls; see [the diagnostic report](diagnostics/deployment-approval/REPORT.md). Receipts 9–12 are copied unchanged into the primary receipt directory for playback.
 
 ## Run locally
 
@@ -24,9 +35,9 @@ Tests use mocked model responses and make no external inference calls.
 
 The server posts the owner-supplied no-auth request format to the exact authorized Hugging Face endpoint. It sends three nonempty strings under `inputs.policy`, `inputs.evidence` and `inputs.claim`. The provider enforces the 16,384-token combined limit by rejection. The app never truncates inputs.
 
-The original local build used no keys, credentials, paid services or private client data. The owner subsequently authorized publication and exactly three additional PHP-case attempts after the five original calls. The updated total cap is **eight calls**, all now used. The limit and attempt reservations are persisted in `receipts/call-ledger.json`; do not reset them or rerun cases to bypass authorization. There are no automatic retries. HTTP 401/402/403 from the provider persistently stops further live calls. A filesystem lock and ledger reload serialize reservations across instances sharing the same receipt directory; a stale lock after a crash blocks new calls pending inspection.
+The original local build used no keys, credentials, paid services or private client data. The owner subsequently authorized publication, exactly three PHP-case attempts after the original five, and then exactly four predeclared deployment attempts. The total cap is **twelve calls**, all now used. The primary ledger contains all twelve entries; the diagnostic ledger is a historical record of those same attempts and must not be counted again. The limit and reservations are persisted in `receipts/call-ledger.json`; do not reset them or rerun cases to bypass authorization. There are no automatic retries. HTTP 401/402/403 from the provider persistently stops further live calls. A filesystem lock and ledger reload serialize reservations across instances sharing the same receipt directory; a stale lock after a crash blocks new calls pending inspection.
 
-## Actual live results — 24 October 2026
+## Historical MFA results — 24 October 2026
 
 | Synthetic case | Human reference | Calibrated status | Raw label | Prediction set |
 | --- | --- | --- | --- | --- |
@@ -38,9 +49,9 @@ The original local build used no keys, credentials, paid services or private cli
 
 The conflicting-records case returned 99.9865% for `inconsistent_context`. The current-exception case did not match its human reference. These are observed outcomes from this small synthetic set, not accuracy claims. Do not present the raw label as the calibrated verdict. All five responses report `model: banyan-sapling` and include source/weights hashes, token usage and model timing; these identifiers are server-reported provenance, not an independent weights audit.
 
-Receipts `receipt-01-*.json` through `receipt-08-*.json` contain exact inputs, complete raw responses, HTTP status and timing. The original smoke curl request and response are preserved; the published smoke headers omit provider-internal routing and request identifiers. `fixtures.json` contains seven cases and separate human references. The original `FIXTURE_SPEC.md` retains an unrun scope-distractor idea.
+Receipts `receipt-01-*.json` through `receipt-12-*.json` contain exact inputs, complete raw responses, HTTP status and timing. The original smoke curl request and response are preserved; the published smoke headers omit provider-internal routing and request identifiers. `fixtures.json` contains four primary deployment cases and seven historical cases with separate human references. The original `FIXTURE_SPEC.md` retains an unrun scope-distractor idea.
 
-## PHP hosting follow-up
+## Historical PHP hosting follow-up
 
 The three additional calls assess **CVE-2026-109618 only**, using dated public source context plus an invented `demo-shop.example` inventory and PHP Info observations. See [PHP_HOSTING_CASES.md](PHP_HOSTING_CASES.md) and `sources/php-hosting.json` for attribution, snapshot dates, the fetched CVE record hash and the exact evidence boundary. They make no claim that a real site is compromised or that PHP is safe against every vulnerability.
 

@@ -109,6 +109,14 @@ function renderReceipt(receipt, saved) {
   if (output.prediction_set.length === 0) set.append(el('span', 'prediction-chip', 'Empty set'));
   statusBox.append(set);
   wrap.append(statusBox);
+  if (state.selected?.category === 'deployment') {
+    const guidance = output.status === 'violation'
+      ? 'Stop this release review and examine the explicit rejection in the supplied record.'
+      : output.status === 'inconsistent_context'
+        ? 'Resolve the conflicting approval records before deciding whether to release.'
+        : 'Request human review. This result does not establish permission to deploy.';
+    wrap.append(el('p', 'review-guidance', `Review guidance: ${guidance} This app does not control deployment.`));
+  }
   const rawLine = el('div', 'raw-line');
   rawLine.append(el('span', '', 'Raw label · secondary'), el('strong', '', names[output.raw_label] || output.raw_label));
   wrap.append(rawLine);
@@ -198,16 +206,19 @@ for (const field of fields) {
 async function init() {
   const [fixtures, receipts, config] = await Promise.all([api('/api/fixtures'), api('/api/receipts'), api('/api/config')]);
   Object.assign(state, { fixtures, receipts, config });
-  for (const [index, fixture] of fixtures.entries()) {
+  let primaryIndex = 0;
+  let historicalIndex = 0;
+  for (const fixture of fixtures) {
     const button = el('button', 'fixture-button');
     button.type = 'button';
     button.dataset.id = fixture.id;
     button.setAttribute('aria-pressed', 'false');
     const title = el('span', 'fixture-title');
-    title.append(el('span', 'case-num', String(index + 1).padStart(2, '0')), document.createTextNode(fixture.title));
+    const number = fixture.historical ? `H${++historicalIndex}` : String(++primaryIndex).padStart(2, '0');
+    title.append(el('span', 'case-num', number), document.createTextNode(fixture.title));
     button.append(title, el('span', 'fixture-subtitle', fixture.subtitle));
     button.addEventListener('click', () => chooseFixture(fixture));
-    $('#fixture-buttons').append(button);
+    $(fixture.historical ? '#historical-fixture-buttons' : '#fixture-buttons').append(button);
   }
   setBudget();
   chooseFixture(fixtures[0]);

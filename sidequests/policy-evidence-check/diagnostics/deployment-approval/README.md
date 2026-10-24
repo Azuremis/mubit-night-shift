@@ -15,4 +15,6 @@ A story pivot requires meaningful actual classification. The original conflictin
 
 ## Completed run
 
-Exactly four requests completed with HTTP 200. Explicit rejection returned calibrated `violation` with a singleton set; contradictory approvals returned calibrated `inconsistent_context` with a singleton set. Approval plus passing tests and missing approval both remained `unsure` with all four labels. See `REPORT.md`, `results.json` and receipts 9–12. The global twelve-call limit is exhausted. The active UI remains unchanged pending the parent's story decision.
+Exactly four requests completed with HTTP 200. Explicit rejection returned calibrated `violation` with a singleton set; contradictory approvals returned calibrated `inconsistent_context` with a singleton set. Approval plus passing tests and missing approval both remained `unsure` with all four labels. See `REPORT.md`, `results.json` and receipts 9–12. The global twelve-call limit is exhausted.
+
+The active UI stayed unchanged until the parent reviewed these results and approved integration. It now presents these four cases as primary examples and preserves the previous seven cases as historical. Primary receipt copies are byte-identical to this diagnostic record. The frozen diagnostic inputs and results remain unchanged.

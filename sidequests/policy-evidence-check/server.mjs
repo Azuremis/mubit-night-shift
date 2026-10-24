@@ -68,7 +68,7 @@ async function requestJSON(req) {
   catch { throw new Error('Request body must be valid JSON.'); }
 }
 
-export async function createApp({ root = ROOT, fetchImpl = fetch, maxCalls = 8, timeoutMs = 45000 } = {}) {
+export async function createApp({ root = ROOT, fetchImpl = fetch, maxCalls = 12, timeoutMs = 45000 } = {}) {
   const receiptDir = path.join(root, 'receipts');
   await mkdir(receiptDir, { recursive: true });
   const ledgerFile = path.join(receiptDir, 'call-ledger.json');

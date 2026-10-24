@@ -1,0 +1,62 @@
+{
+  "id": "receipt-10-57703127",
+  "callNumber": 10,
+  "createdAt": "2026-10-24T08:29:37.674Z",
+  "fixtureId": "deployment-rejected",
+  "request": {
+    "inputs": {
+      "policy": "A release is permitted for production deployment only when its release approver has approved that same release and all its required tests have passed. An explicit rejection by the release approver blocks deployment. If approval status is missing, permission cannot be established. If equally authoritative approval records disagree about the same release at the same time and neither overrides the other, the evidence is inconsistent.",
+      "evidence": "Synthetic deployment record, 2026-10-24T08:20:00Z. Release: r-42. The release approver has explicitly rejected r-42 for production deployment. All required tests for r-42 have passed.",
+      "claim": "Release r-42 is permitted for production deployment."
+    }
+  },
+  "provenance": {
+    "endpoint": "https://6adbee0669a00298cd4774c9.endpoints.huggingface.cloud",
+    "source": "Owner-supplied Banyan Sapling API Quickstart",
+    "attempts": 1
+  },
+  "outcome": "success",
+  "response": {
+    "model": "banyan-sapling",
+    "release_stage": "research-preview",
+    "source_release_sha256": "245970b0e5b0b22d64c1434ee21dd221b1f211f06bda5465f8fc108f70cd5c3f",
+    "weights_sha256": "103a67f7a112589346c3e1090f5bca182d7fdafee85dfd43e67ac5d75eb04dd4",
+    "logits": [
+      -11.746459007263184,
+      22.127105712890625,
+      -8.462570190429688,
+      -22.558162689208984
+    ],
+    "conformal_prediction_set": [
+      "violation"
+    ],
+    "prediction_set": [
+      "violation"
+    ],
+    "status": "violation",
+    "raw_label": "violation",
+    "fallback_used": false,
+    "fallback_reason": null,
+    "status_provenance": "conformal_singleton",
+    "empty_set_policy": "rounded_argmax",
+    "conformal_singleton": true,
+    "probabilities": {
+      "supported": 0.0014240592142766878,
+      "violation": 0.9957127103399388,
+      "insufficient_information": 0.002687198373285964,
+      "inconsistent_context": 0.00017603207249856256
+    },
+    "usage": {
+      "input_tokens": 193,
+      "generated_tokens": 0
+    },
+    "timing_ms": {
+      "model": 1028.8681489982991
+    }
+  },
+  "transport": {
+    "httpStatus": 200,
+    "durationMs": 1120
+  },
+  "completedAt": "2026-10-24T08:29:38.797Z"
+}
