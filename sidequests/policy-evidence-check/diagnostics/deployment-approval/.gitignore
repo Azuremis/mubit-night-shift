@@ -1,0 +1,3 @@
+receipts/*
+!receipts/call-ledger.json
+*.log

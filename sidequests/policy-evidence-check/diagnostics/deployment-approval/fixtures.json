@@ -1,0 +1,34 @@
+[
+  {
+    "id": "deployment-approved",
+    "title": "Approval and passing tests",
+    "expected": "supported",
+    "evidence": "Synthetic deployment record, 2026-10-24T08:20:00Z. Release: r-42. The release approver has approved r-42 for production deployment. All required tests for r-42 have passed.",
+    "policy": "A release is permitted for production deployment only when its release approver has approved that same release and all its required tests have passed. An explicit rejection by the release approver blocks deployment. If approval status is missing, permission cannot be established. If equally authoritative approval records disagree about the same release at the same time and neither overrides the other, the evidence is inconsistent.",
+    "claim": "Release r-42 is permitted for production deployment."
+  },
+  {
+    "id": "deployment-rejected",
+    "title": "Explicit rejection",
+    "expected": "violation",
+    "evidence": "Synthetic deployment record, 2026-10-24T08:20:00Z. Release: r-42. The release approver has explicitly rejected r-42 for production deployment. All required tests for r-42 have passed.",
+    "policy": "A release is permitted for production deployment only when its release approver has approved that same release and all its required tests have passed. An explicit rejection by the release approver blocks deployment. If approval status is missing, permission cannot be established. If equally authoritative approval records disagree about the same release at the same time and neither overrides the other, the evidence is inconsistent.",
+    "claim": "Release r-42 is permitted for production deployment."
+  },
+  {
+    "id": "deployment-missing-approval",
+    "title": "Missing approval",
+    "expected": "insufficient_information",
+    "evidence": "Synthetic deployment record, 2026-10-24T08:20:00Z. Release: r-42. All required tests for r-42 have passed. No approval or rejection record for r-42 was supplied.",
+    "policy": "A release is permitted for production deployment only when its release approver has approved that same release and all its required tests have passed. An explicit rejection by the release approver blocks deployment. If approval status is missing, permission cannot be established. If equally authoritative approval records disagree about the same release at the same time and neither overrides the other, the evidence is inconsistent.",
+    "claim": "Release r-42 is permitted for production deployment."
+  },
+  {
+    "id": "deployment-conflicting-approvals",
+    "title": "Contradictory approvals",
+    "expected": "inconsistent_context",
+    "evidence": "Synthetic records for release r-42 at 2026-10-24T08:20:00Z. Record A: the release approver has approved r-42 for production deployment. Record B: the release approver has rejected r-42 for production deployment. Both records are equally authoritative and describe the same release at exactly the same time. Neither overrides or supersedes the other. All required tests for r-42 have passed.",
+    "policy": "A release is permitted for production deployment only when its release approver has approved that same release and all its required tests have passed. An explicit rejection by the release approver blocks deployment. If approval status is missing, permission cannot be established. If equally authoritative approval records disagree about the same release at the same time and neither overrides the other, the evidence is inconsistent.",
+    "claim": "Release r-42 is permitted for production deployment."
+  }
+]

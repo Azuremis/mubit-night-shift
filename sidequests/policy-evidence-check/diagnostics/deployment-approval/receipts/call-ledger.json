@@ -1,0 +1,86 @@
+{
+  "limit": 12,
+  "calls": [
+    {
+      "callNumber": 1,
+      "receiptId": "receipt-01-smoke",
+      "createdAt": "2026-10-24T07:42:46Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 2,
+      "receiptId": "receipt-02-4a771ae5",
+      "createdAt": "2026-10-24T07:48:16.397Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 3,
+      "receiptId": "receipt-03-84eb50e0",
+      "createdAt": "2026-10-24T07:48:17.932Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 4,
+      "receiptId": "receipt-04-dc9da390",
+      "createdAt": "2026-10-24T07:48:19.154Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 5,
+      "receiptId": "receipt-05-8da8abe2",
+      "createdAt": "2026-10-24T07:48:20.311Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 6,
+      "receiptId": "receipt-06-5eccb84f",
+      "createdAt": "2026-10-24T08:13:33.490Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 7,
+      "receiptId": "receipt-07-2b877d47",
+      "createdAt": "2026-10-24T08:13:35.003Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 8,
+      "receiptId": "receipt-08-2c178f30",
+      "createdAt": "2026-10-24T08:13:36.206Z",
+      "outcome": "success"
+    }
+  ],
+  "authorizations": [
+    {
+      "date": "2026-10-24",
+      "prior_used": 5,
+      "additional_attempts": 3,
+      "total_limit": 8,
+      "scope": "Exactly one attempt for each synthetic PHP fixture; no retries or tuning",
+      "fixture_ids": [
+        "php-rollout-only",
+        "php-bound-backport",
+        "php-customer-vps"
+      ]
+    },
+    {
+      "date": "2026-10-24",
+      "prior_used": 8,
+      "additional_attempts": 4,
+      "total_limit": 12,
+      "scope": "One attempt per predeclared deployment diagnostic fixture, no retries/tuning; active UI unchanged",
+      "fixture_ids": [
+        "deployment-approved",
+        "deployment-rejected",
+        "deployment-missing-approval",
+        "deployment-conflicting-approvals"
+      ]
+    }
+  ],
+  "prior_calls_reference": {
+    "path": "../../receipts/call-ledger.json",
+    "sha256": "856b0116cd498c05877704a4ab66e4b283e7da88592a57aa9ac29b085dca9dee",
+    "count": 8,
+    "note": "Calls 1\u20138 remain in the primary receipts directory; this distinct diagnostic directory holds calls 9\u201312 only."
+  }
+}

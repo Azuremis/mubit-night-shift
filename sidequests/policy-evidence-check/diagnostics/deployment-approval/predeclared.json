@@ -1,0 +1,16 @@
+{
+  "declared_at": "2026-10-24T08:28:13.548267+00:00",
+  "fixtures_sha256": "9b36f1c2df9181aacf670d3743285ee789535b7351d3ff8f896fd0a567e65179",
+  "reference_answers": {
+    "deployment-approved": "supported",
+    "deployment-rejected": "violation",
+    "deployment-missing-approval": "insufficient_information",
+    "deployment-conflicting-approvals": "inconsistent_context"
+  },
+  "maximum_additional_requests": 4,
+  "global_call_limit": 12,
+  "same_policy_and_claim": true,
+  "tuning_or_retries": false,
+  "active_ui_changes": false,
+  "stop_rule": "Stop after these four attempts; if all calibrated statuses are unsure, report calibration metadata without changing model parameters or forcing highest-label verdicts."
+}
