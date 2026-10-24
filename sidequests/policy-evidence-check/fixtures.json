@@ -9,7 +9,8 @@
     "subtitle": "A release packet that must stop for review.",
     "humanNote": "Predeclared reference: the approver explicitly rejected this release, so the policy does not permit deployment.",
     "category": "deployment",
-    "historical": false
+    "historical": false,
+    "reviewNextStep": "Ask the designated release owner to resolve the explicit rejection and record an authoritative decision before considering release."
   },
   {
     "id": "deployment-conflicting-approvals",
@@ -21,7 +22,8 @@
     "subtitle": "Equally authoritative records disagree.",
     "humanNote": "Predeclared reference: the same release has approval and rejection at the same time with no source precedence.",
     "category": "deployment",
-    "historical": false
+    "historical": false,
+    "reviewNextStep": "Ask the release owner to reconcile records A and B and record which authoritative decision supersedes the other."
   },
   {
     "id": "deployment-approved",
@@ -33,7 +35,8 @@
     "subtitle": "Approval and tests pass; Sapling remains unsure.",
     "humanNote": "Predeclared reference: approval and passing tests satisfy the fixture policy. The actual calibrated response remained unsure; do not treat the raw supported label as permission.",
     "category": "deployment",
-    "historical": false
+    "historical": false,
+    "reviewNextStep": "Have a reviewer check the original policy wording, owner approval and PASS evidence; this unsure result does not grant release permission."
   },
   {
     "id": "deployment-missing-approval",
@@ -45,7 +48,8 @@
     "subtitle": "Passing tests alone leave approval unproven.",
     "humanNote": "Predeclared reference: required tests passed but approval was not supplied. The actual raw violation differs from this reference; calibrated status is unsure.",
     "category": "deployment",
-    "historical": false
+    "historical": false,
+    "reviewNextStep": "Request the missing owner approval or rejection for r-42 and attach it to the passing-test evidence before deciding."
   },
   {
     "id": "expired",
@@ -123,5 +127,43 @@
     "policy": "Assess only closure of the CVE-2026-109618 alert for the named synthetic website at the stated review snapshot. Accept closure only when evidence binds that exact asset to its hosting platform/tier, an applicable remediation, and a current observation of the PHP runtime serving that website that meets the provider verification guidance. A general rollout announcement, CLI version, or WAF statement alone is not site-specific patch proof. An old displayed version can still qualify when an applicable backport is demonstrated by the provider-prescribed serving-runtime check. If asset, tier or runtime proof is missing, the closure claim is unproven; do not infer vulnerability or compromise from missing evidence. Other CVEs and general PHP safety are outside this policy.",
     "claim": "At the synthetic 2026-10-24T09:00:00Z review snapshot, the supplied records establish that the PHP runtime serving demo-shop.example meets the applicable remediation evidence requirement to close its CVE-2026-109618 alert.",
     "historical": true
+  },
+  {
+    "id": "deployment-v2-approved",
+    "title": "Policy v2 · approved",
+    "expected": "supported",
+    "policy": "Policy v2 is the complete permission rule for this synthetic release; no other approval rules apply. The designated release owner is owner-01. Release r-42 is permitted for production deployment if and only if owner-01 explicitly approves r-42, all required tests for r-42 have status PASS, and the complete approval record has no conflicting decision for r-42. When all three conditions hold, deployment is permitted under this policy. An explicit rejection by owner-01 forbids deployment even if tests pass. Missing approval or missing test evidence leaves permission unestablished and requires human review; missing evidence is not an explicit rejection. Equally authoritative approval and rejection for the same release and snapshot, with no precedence, are inconsistent context and require conflict resolution before permission.",
+    "evidence": "SYNTHETIC COMPLETE RELEASE PACKET\nrelease: r-42\nsnapshot: 2026-10-24T09:00:00Z\ndesignated release owner: owner-01\ncomplete approval record: owner-01 explicitly APPROVED r-42 for production deployment\nrequired tests: test-01=PASS; test-02=PASS\nconflicting approval decisions: none\nThis packet lists every required test and every approval decision for this release at the snapshot. No other records or rules exist in this synthetic scenario.",
+    "claim": "Under this complete policy, release r-42 is permitted for production deployment.",
+    "version": 2,
+    "policyVersion": 2,
+    "category": "deployment",
+    "historical": false,
+    "cumulativeBudget": {
+      "used": 21,
+      "limit": 21
+    },
+    "subtitle": "Corrected iff policy; saved calibrated unsure",
+    "humanNote": "Frozen v2 human reference, separate from the actual saved calibrated result. Original v1 records remain unchanged.",
+    "reviewNextStep": "Review the complete v2 permission rule, the designated owner decision, every PASS test and the complete no-conflict record; calibrated status remains authoritative."
+  },
+  {
+    "id": "deployment-v2-rejected",
+    "title": "Policy v2 · rejected",
+    "expected": "violation",
+    "policy": "Policy v2 is the complete permission rule for this synthetic release; no other approval rules apply. The designated release owner is owner-01. Release r-42 is permitted for production deployment if and only if owner-01 explicitly approves r-42, all required tests for r-42 have status PASS, and the complete approval record has no conflicting decision for r-42. When all three conditions hold, deployment is permitted under this policy. An explicit rejection by owner-01 forbids deployment even if tests pass. Missing approval or missing test evidence leaves permission unestablished and requires human review; missing evidence is not an explicit rejection. Equally authoritative approval and rejection for the same release and snapshot, with no precedence, are inconsistent context and require conflict resolution before permission.",
+    "evidence": "SYNTHETIC COMPLETE RELEASE PACKET\nrelease: r-42\nsnapshot: 2026-10-24T09:00:00Z\ndesignated release owner: owner-01\ncomplete approval record: owner-01 explicitly REJECTED r-42 for production deployment\nrequired tests: test-01=PASS; test-02=PASS\nconflicting approval decisions: none\nThis packet lists every required test and every approval decision for this release at the snapshot. No other records or rules exist in this synthetic scenario.",
+    "claim": "Under this complete policy, release r-42 is permitted for production deployment.",
+    "version": 2,
+    "policyVersion": 2,
+    "category": "deployment",
+    "historical": false,
+    "cumulativeBudget": {
+      "used": 21,
+      "limit": 21
+    },
+    "subtitle": "Corrected iff policy; saved calibrated violation",
+    "humanNote": "Frozen v2 human reference, separate from the actual saved calibrated result. Original v1 records remain unchanged.",
+    "reviewNextStep": "Review the complete v2 permission rule, the designated owner decision, every PASS test and the complete no-conflict record; calibrated status remains authoritative."
   }
 ]

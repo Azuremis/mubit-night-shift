@@ -1,5 +1,7 @@
 # Setup, replay and tests
 
+> Version note: the original twelve-call record, PDF, video and evidence manifest below are preserved as the baseline at commit 445f1c4. The additive policy-v2 correction and heuristic review workflow are documented in [the v2 report](../../sidequests/policy-evidence-check/diagnostics/deployment-policy-v2/REPORT.md). Two additional application calls bring saved application receipts to fourteen; seven separate citation attempts reported by the parent make cumulative usage 21/21. Calibrated verdicts remain unchanged; raw-score priority is only a human-review heuristic. Use `?view=original` for the original presentation view.
+
 ## Requirements
 
 Use Node.js 22 or newer and npm. The app has no package dependencies, model downloads or build step. The local server uses Node's built-in HTTP and filesystem APIs.

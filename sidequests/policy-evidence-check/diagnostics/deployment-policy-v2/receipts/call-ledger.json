@@ -1,6 +1,19 @@
 {
   "limit": 2,
-  "calls": [],
+  "calls": [
+    {
+      "callNumber": 1,
+      "receiptId": "receipt-01-181968de",
+      "createdAt": "2026-10-24T09:02:26.906Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 2,
+      "receiptId": "receipt-02-2b0b26a2",
+      "createdAt": "2026-10-24T09:02:28.355Z",
+      "outcome": "success"
+    }
+  ],
   "scope": "Only the two policy-v2 attempts; do not treat this local count as the global total",
   "cumulativeAccounting": {
     "declared_at": "2026-10-24T09:02:14.813069+00:00",

@@ -1,3 +1,5 @@
 receipts/*
 !receipts/call-ledger.json
 *.log
+!receipts/receipt-01-181968de.json
+!receipts/receipt-02-2b0b26a2.json

@@ -17,7 +17,7 @@ npm test
 npm start
 ```
 
-Open http://127.0.0.1:4321. If that port is already in use, run `PORT=4322 npm start` and open http://127.0.0.1:4322. The server binds only to localhost. Selecting fixtures and inspecting saved receipts makes no model calls. All **twelve authorized attempts are recorded and the budget is exhausted**, so Verify is disabled. Preserve the ledger; do not reset it to make new calls.
+Open http://127.0.0.1:4321. If that port is already in use, run `PORT=4322 npm start` and open http://127.0.0.1:4322. The server binds only to localhost. Selecting fixtures and inspecting saved receipts makes no model calls. The original main ledger is **12/12**, the separate corrected-policy diagnostic is **2/2**, and the parent-reported cumulative budget including seven citation attempts is **21/21**; all are exhausted, so Verify is disabled. Preserve the ledger; do not reset it to make new calls.
 
 - [Validation](sidequests/policy-evidence-check/VALIDATION.md)
 - [Predeclared deployment cases and actual results](sidequests/policy-evidence-check/diagnostics/deployment-approval/REPORT.md)
@@ -37,3 +37,7 @@ Open http://127.0.0.1:4321. If that port is already in use, run `PORT=4322 npm s
 Only reviewed sidequest code, synthetic fixtures, receipts, screenshots and documentation belong in this repository. Existing local session data and research are excluded by `.gitignore`. Keep credentials, private client data, agent configuration and future unreviewed runtime outputs out of commits. Review the staged file list before every push; ignore rules do not remove already tracked files.
 
 The existing `/model-card-clean/` and `/research/` directories stay local. Private submission drafts and QA intermediates remain in ignored `.local/` directories. Public app and video links are added only after verification. Social publication and final challenge submission remain separate actions.
+
+## Additive policy-v2 update
+
+[Policy-v2 correction and exact results](sidequests/policy-evidence-check/diagnostics/deployment-policy-v2/REPORT.md) preserves the original inputs and adds an explicit complete if-and-only-if permission rule. Its approved result still returned unsure; rejection returned calibrated singleton violation. The UI adds clearly labeled heuristic human-review ordering from raw violation plus inconsistent-context scores, with unchanged calibrated verdicts and no release authority. The original presentation view remains available at `?view=original`. Existing video/PDF assets document the twelve-call baseline and are unchanged.

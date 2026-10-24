@@ -1,0 +1,66 @@
+{
+  "fixturesSha256": "95f192d7512f85dbbe5b7c2c2a3ea7282e48685fe3d1bae237e08eeb5dc2e808",
+  "results": [
+    {
+      "fixtureId": "deployment-v2-approved",
+      "humanReference": "supported",
+      "receiptId": "receipt-01-181968de",
+      "diagnosticCallNumber": 1,
+      "cumulativeAttempt": 20,
+      "outcome": "success",
+      "httpStatus": 200,
+      "status": "unsure",
+      "rawLabel": "supported",
+      "predictionSet": [
+        "supported",
+        "violation",
+        "insufficient_information",
+        "inconsistent_context"
+      ],
+      "statusProvenance": "multiple_conformal_labels",
+      "probabilities": {
+        "supported": 0.8832464767163353,
+        "violation": 0.013172216424215758,
+        "insufficient_information": 0.09855704401040773,
+        "inconsistent_context": 0.0050242628490412425
+      },
+      "modelMs": 1062.0219099982933
+    },
+    {
+      "fixtureId": "deployment-v2-rejected",
+      "humanReference": "violation",
+      "receiptId": "receipt-02-2b0b26a2",
+      "diagnosticCallNumber": 2,
+      "cumulativeAttempt": 21,
+      "outcome": "success",
+      "httpStatus": 200,
+      "status": "violation",
+      "rawLabel": "violation",
+      "predictionSet": [
+        "violation"
+      ],
+      "statusProvenance": "conformal_singleton",
+      "probabilities": {
+        "supported": 0.0021100794424182257,
+        "violation": 0.994153949395177,
+        "insufficient_information": 0.0033229521656955897,
+        "inconsistent_context": 0.00041301899670929064
+      },
+      "modelMs": 1060.5508010012272
+    }
+  ],
+  "diagnosticBudget": {
+    "used": 2,
+    "limit": 2,
+    "remaining": 0,
+    "inFlight": false,
+    "accessBlocked": false
+  },
+  "cumulativeBudget": {
+    "used": 21,
+    "limit": 21
+  },
+  "modelParametersChanged": false,
+  "retries": 0,
+  "originalOutputsChanged": false
+}

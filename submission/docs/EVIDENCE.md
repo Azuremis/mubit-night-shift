@@ -1,5 +1,7 @@
 # Recorded results and provenance
 
+> Version note: the original twelve-call record, PDF, video and evidence manifest below are preserved as the baseline at commit 445f1c4. The additive policy-v2 correction and heuristic review workflow are documented in [the v2 report](../../sidequests/policy-evidence-check/diagnostics/deployment-policy-v2/REPORT.md). Two additional application calls bring saved application receipts to fourteen; seven separate citation attempts reported by the parent make cumulative usage 21/21. Calibrated verdicts remain unchanged; raw-score priority is only a human-review heuristic. Use `?view=original` for the original presentation view.
+
 Snapshot: 24 October 2026. Core application baseline: [`8889f08`](https://github.com/Azuremis/mubit-night-shift/commit/8889f08d3ed439d040a22b750d46adf4d970862a).
 
 **Twelve actual endpoint calls returned nine calibrated `unsure` results, one `violation` and two `inconsistent_context` results.** The initial eight comprise a smoke call, four MFA cases and three PHP cases. Four predeclared deployment-approval cases followed under a separately authorized extension. No tuning, automatic retry or fine-tuning took place.

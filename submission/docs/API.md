@@ -1,5 +1,7 @@
 # Local API and Sapling contract
 
+> Version note: the original twelve-call record, PDF, video and evidence manifest below are preserved as the baseline at commit 445f1c4. The additive policy-v2 correction and heuristic review workflow are documented in [the v2 report](../../sidequests/policy-evidence-check/diagnostics/deployment-policy-v2/REPORT.md). Two additional application calls bring saved application receipts to fourteen; seven separate citation attempts reported by the parent make cumulative usage 21/21. Calibrated verdicts remain unchanged; raw-score priority is only a human-review heuristic. Use `?view=original` for the original presentation view.
+
 This describes the current local `sidequests/policy-evidence-check/server.mjs` interface. The original integration baseline is commit `8889f08d3ed439d040a22b750d46adf4d970862a`; the current fixture set and budget also include four later deployment cases. A public hosting adapter may differ. Use its own verified contract rather than assuming the local write API exists publicly.
 
 ## Local routes

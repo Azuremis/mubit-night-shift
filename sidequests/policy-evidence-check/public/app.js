@@ -3,6 +3,13 @@ const fields = ['policy', 'evidence', 'claim'];
 const labels = ['supported', 'violation', 'insufficient_information', 'inconsistent_context'];
 const names = { supported: 'Supported', violation: 'Violation', insufficient_information: 'Insufficient information', inconsistent_context: 'Inconsistent context', unsure: 'Unsure' };
 const state = { fixtures: [], receipts: [], config: null, selected: null, busy: false, shownReceipt: null };
+const originalView = new URLSearchParams(location.search).get('view') === 'original';
+
+function reviewPriority(output) {
+  const a = output?.probabilities?.violation;
+  const b = output?.probabilities?.inconsistent_context;
+  return Number.isFinite(a) && Number.isFinite(b) ? 100 * (a + b) : null;
+}
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -25,7 +32,10 @@ async function api(url, options) {
 function setBudget(budget) {
   if (budget) state.config.budget = budget;
   const b = state.config.budget;
-  $('#budget-label').textContent = `Local session · ${b.used}/${b.limit} authorized calls used`;
+  const cumulative = state.fixtures.find(f => f.cumulativeBudget)?.cumulativeBudget;
+  $('#budget-label').textContent = cumulative && !originalView
+    ? `Global experiments · ${cumulative.used}/${cumulative.limit} attempts used · Main ledger ${b.used}/${b.limit}`
+    : `Local session · ${b.used}/${b.limit} authorized calls used`;
   $('#verify-button').disabled = state.busy || b.remaining === 0 || b.accessBlocked;
   $('#request-note').textContent = b.accessBlocked ? 'Live requests stopped: provider access requires review.' : b.remaining === 0 ? 'Session budget reached. Saved receipts remain available.' : 'Each click sends one request. No automatic retries.';
 }
@@ -110,11 +120,15 @@ function renderReceipt(receipt, saved) {
   statusBox.append(set);
   wrap.append(statusBox);
   if (state.selected?.category === 'deployment') {
-    const guidance = output.status === 'violation'
+    const guidance = (!originalView && state.selected.reviewNextStep) || (output.status === 'violation'
       ? 'Stop this release review and examine the explicit rejection in the supplied record.'
       : output.status === 'inconsistent_context'
         ? 'Resolve the conflicting approval records before deciding whether to release.'
-        : 'Request human review. This result does not establish permission to deploy.';
+        : 'Request human review. This result does not establish permission to deploy.');
+    if (!originalView) {
+      const priority = reviewPriority(output);
+      wrap.append(el('p', 'review-priority', `Review priority · heuristic: ${priority === null ? 'unavailable' : priority.toFixed(1) + ' points'}. Raw violation + inconsistent-context scores; not calibrated risk, safety or permission.`));
+    }
     wrap.append(el('p', 'review-guidance', `Review guidance: ${guidance} This app does not control deployment.`));
   }
   const rawLine = el('div', 'raw-line');
@@ -208,17 +222,33 @@ async function init() {
   Object.assign(state, { fixtures, receipts, config });
   let primaryIndex = 0;
   let historicalIndex = 0;
+  let v2Index = 0;
   for (const fixture of fixtures) {
+    if (originalView && fixture.policyVersion === 2) continue;
     const button = el('button', 'fixture-button');
     button.type = 'button';
     button.dataset.id = fixture.id;
     button.setAttribute('aria-pressed', 'false');
     const title = el('span', 'fixture-title');
-    const number = fixture.historical ? `H${++historicalIndex}` : String(++primaryIndex).padStart(2, '0');
+    const number = fixture.policyVersion === 2 ? `V${++v2Index}` : fixture.historical ? `H${++historicalIndex}` : String(++primaryIndex).padStart(2, '0');
     title.append(el('span', 'case-num', number), document.createTextNode(fixture.title));
     button.append(title, el('span', 'fixture-subtitle', fixture.subtitle));
     button.addEventListener('click', () => chooseFixture(fixture));
-    $(fixture.historical ? '#historical-fixture-buttons' : '#fixture-buttons').append(button);
+    $(fixture.policyVersion === 2 ? '#policy-v2-buttons' : fixture.historical ? '#historical-fixture-buttons' : '#fixture-buttons').append(button);
+  }
+  $('#priority-queue').hidden = originalView;
+  $('#policy-v2-examples').hidden = originalView;
+  if (!originalView) {
+    const ordered = fixtures.filter(f => f.category === 'deployment' && f.policyVersion !== 2).map(fixture => {
+      const receipt = receipts.find(item => sameInputs(item.request?.inputs, fixture));
+      return { fixture, score: receipt?.outcome === 'success' ? reviewPriority(receipt.response) : null };
+    }).filter(item => item.score !== null).sort((a, b) => b.score - a.score);
+    for (const { fixture, score } of ordered) {
+      const button = el('button', 'priority-item', `${fixture.title} · ${score.toFixed(1)} points`);
+      button.type = 'button';
+      button.addEventListener('click', () => chooseFixture(fixture));
+      $('#priority-items').append(button);
+    }
   }
   setBudget();
   chooseFixture(fixtures[0]);

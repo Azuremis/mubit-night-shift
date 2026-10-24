@@ -1,0 +1,68 @@
+{
+  "id": "receipt-01-181968de",
+  "callNumber": 1,
+  "createdAt": "2026-10-24T09:02:26.906Z",
+  "fixtureId": "deployment-v2-approved",
+  "request": {
+    "inputs": {
+      "policy": "Policy v2 is the complete permission rule for this synthetic release; no other approval rules apply. The designated release owner is owner-01. Release r-42 is permitted for production deployment if and only if owner-01 explicitly approves r-42, all required tests for r-42 have status PASS, and the complete approval record has no conflicting decision for r-42. When all three conditions hold, deployment is permitted under this policy. An explicit rejection by owner-01 forbids deployment even if tests pass. Missing approval or missing test evidence leaves permission unestablished and requires human review; missing evidence is not an explicit rejection. Equally authoritative approval and rejection for the same release and snapshot, with no precedence, are inconsistent context and require conflict resolution before permission.",
+      "evidence": "SYNTHETIC COMPLETE RELEASE PACKET\nrelease: r-42\nsnapshot: 2026-10-24T09:00:00Z\ndesignated release owner: owner-01\ncomplete approval record: owner-01 explicitly APPROVED r-42 for production deployment\nrequired tests: test-01=PASS; test-02=PASS\nconflicting approval decisions: none\nThis packet lists every required test and every approval decision for this release at the snapshot. No other records or rules exist in this synthetic scenario.",
+      "claim": "Under this complete policy, release r-42 is permitted for production deployment."
+    }
+  },
+  "provenance": {
+    "endpoint": "https://6adbee0669a00298cd4774c9.endpoints.huggingface.cloud",
+    "source": "Owner-supplied Banyan Sapling API Quickstart",
+    "attempts": 1
+  },
+  "outcome": "success",
+  "response": {
+    "model": "banyan-sapling",
+    "release_stage": "research-preview",
+    "source_release_sha256": "245970b0e5b0b22d64c1434ee21dd221b1f211f06bda5465f8fc108f70cd5c3f",
+    "weights_sha256": "103a67f7a112589346c3e1090f5bca182d7fdafee85dfd43e67ac5d75eb04dd4",
+    "logits": [
+      11.096844673156738,
+      -10.652198791503906,
+      -0.24426479637622833,
+      -15.636726379394531
+    ],
+    "conformal_prediction_set": [
+      "supported",
+      "violation",
+      "insufficient_information",
+      "inconsistent_context"
+    ],
+    "prediction_set": [
+      "supported",
+      "violation",
+      "insufficient_information",
+      "inconsistent_context"
+    ],
+    "status": "unsure",
+    "raw_label": "supported",
+    "fallback_used": false,
+    "fallback_reason": null,
+    "status_provenance": "multiple_conformal_labels",
+    "empty_set_policy": "rounded_argmax",
+    "conformal_singleton": false,
+    "probabilities": {
+      "supported": 0.8832464767163353,
+      "violation": 0.013172216424215758,
+      "insufficient_information": 0.09855704401040773,
+      "inconsistent_context": 0.0050242628490412425
+    },
+    "usage": {
+      "input_tokens": 347,
+      "generated_tokens": 0
+    },
+    "timing_ms": {
+      "model": 1062.0219099982933
+    }
+  },
+  "transport": {
+    "httpStatus": 200,
+    "durationMs": 1435
+  },
+  "completedAt": "2026-10-24T09:02:28.346Z"
+}

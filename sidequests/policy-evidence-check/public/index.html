@@ -23,6 +23,16 @@
       <section class="case-selector" aria-label="Synthetic review cases">
         <div class="section-label"><span>01 / REVIEW A RELEASE PACKET</span><span>Same policy and claim. Different evidence.</span></div>
         <div id="fixture-buttons" class="fixture-buttons"></div>
+        <section id="priority-queue" class="review-queue" aria-label="Heuristic human review ordering">
+          <strong>Review first · heuristic ordering</strong>
+          <p>Raw violation + inconsistent-context scores order the original four packets for human review. These points are not calibrated risk, safety or release permission.</p>
+          <div id="priority-items" class="priority-items"></div>
+        </section>
+        <details id="policy-v2-examples" class="historical-examples">
+          <summary>Policy v2 · complete permission rule</summary>
+          <p>A versioned correction makes approval, PASS tests and no conflict explicitly necessary and sufficient. The new approved case still returned unsure; the rejection returned singleton violation. Original cases and recordings are preserved.</p>
+          <div id="policy-v2-buttons" class="fixture-buttons" aria-label="Corrected policy v2 pair"></div>
+        </details>
         <details class="historical-examples">
           <summary>Historical examples · MFA and PHP</summary>
           <p>Seven earlier cases and their original results are preserved. These include failed expectations and uncertainty; they are not evidence of reliable approval automation.</p>

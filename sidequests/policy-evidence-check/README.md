@@ -15,6 +15,14 @@ The primary task is identifying explicit rejection and contradictory approval ev
 
 The first two are demonstrated calibrated stop conditions. The positive case remains unsure, so these results do not establish reliable approval automation or four-class accuracy. Keep that limitation visible. The interface starts on rejection, then presents conflict and approved-but-unsure for the demo. Inputs and human references were committed before calls; see [the diagnostic report](diagnostics/deployment-approval/REPORT.md). Receipts 9–12 are copied unchanged into the primary receipt directory for playback.
 
+## Policy v2 and heuristic review ordering
+
+A versioned correction is documented in [the policy-v2 report](diagnostics/deployment-policy-v2/REPORT.md). The complete synthetic permission rule now uses if and only if: designated-owner approval, all tests PASS and no conflicting approval record. Exactly two additional attempts returned approved/unsure and rejected/singleton violation. The original case inputs and outputs were not rewritten.
+
+The default UI now orders the original four release packets for human review using 100 times the sum of raw violation and inconsistent-context scores. These are explicitly heuristic points, not calibrated risk, safety or release permission. Calibrated status and prediction sets remain unchanged. Application-authored next steps identify what a reviewer should request or reconcile; they are not model-generated rationale. The original video-compatible view is available at `?view=original`.
+
+There are fourteen saved application receipts: the original twelve and two policy-v2 results. The parent reports seven additional citation-diagnostic attempts outside this application record, making cumulative usage **21/21**, exhausted. The original main ledger stays 12/12 and the separate v2 ledger is 2/2; the citation count is reported accounting, not invented receipts. The finished video, seven-page PDF and evidence manifest describe the preserved twelve-call baseline at commit 445f1c44a90ff2b91066c512e3912a8247ec1120. No artifacts were silently regenerated.
+
 ## Run locally
 
 Requires Node 22 or newer. No dependencies or model downloads.
