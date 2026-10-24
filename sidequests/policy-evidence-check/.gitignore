@@ -15,6 +15,9 @@ receipts/*
 !receipts/receipt-03-84eb50e0.json
 !receipts/receipt-04-dc9da390.json
 !receipts/receipt-05-8da8abe2.json
+!receipts/receipt-06-5eccb84f.json
+!receipts/receipt-07-2b877d47.json
+!receipts/receipt-08-2c178f30.json
 
 # Future captures require a separate review before adding an exception.
 screenshots/*

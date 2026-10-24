@@ -1,8 +1,8 @@
 # Migration and public-data review — 24 October 2026
 
-The completed event sidequest was copied into `sidequests/policy-evidence-check/` in the owner-selected hackathon repository. All 29 copied files matched their source SHA256 values before the publication edits. The original build directory remains intact as a backup. `MIGRATION_MANIFEST.json` records source and migrated checksums and identifies changed copies.
+The completed event sidequest was copied into `sidequests/policy-evidence-check/` in the owner-selected hackathon repository. All 29 copied files matched their source SHA256 values before the publication edits. The original build directory remains intact as a backup. `MIGRATION_MANIFEST.json` records the original migration snapshot at commit `480b15552b247790b122209a6289d0fafeb07ae8`, before the later approved review fixes and PHP extension; its migrated hashes describe that snapshot rather than subsequent feature changes.
 
-The server, UI, tests, synthetic fixtures, five complete model receipts, call ledger and five screenshots retain their original bytes. Documentation now uses repository-relative run paths and records the later publication authorization. The historical proposal omits a private filesystem path and machine inventory. The smoke header copy omits provider routing details and request identifiers; model responses and inputs are unchanged.
+At that initial migration snapshot, the server, UI, tests, synthetic fixtures, five complete model receipts, call ledger and five screenshots retained their original bytes. Documentation used repository-relative run paths and recorded the later publication authorization. The historical proposal omits a private filesystem path and machine inventory. The smoke header copy omits provider routing details and request identifiers; original model responses and inputs remain unchanged.
 
 ## Privacy boundary
 
@@ -17,6 +17,6 @@ Every sidequest text file was reviewed for credentials, private paths and person
 
 ## Verification
 
-Use `npm test` from this directory for the existing eight mocked tests. Selecting fixtures and viewing saved receipts requires no inference. Preserve the five-used, seven-total ledger; migration must not reset it or consume the remaining debugging calls. See `VALIDATION.md` for the verification completed after migration.
+Use `npm test` from this directory for ten mocked tests: the original eight plus two regression checks for the bounded Astra review findings. Selecting fixtures and viewing saved receipts requires no inference. Migration itself consumed no calls. The owner later approved exactly three PHP attempts after the original five; all eight are now recorded and the budget is exhausted. The original entries were preserved. See `VALIDATION.md` for review fixes and follow-up evidence.
 
 No source files were deleted. No social/Discord submission or rule acceptance was performed.

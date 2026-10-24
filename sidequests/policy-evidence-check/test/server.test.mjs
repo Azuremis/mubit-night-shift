@@ -4,6 +4,7 @@ import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { once } from 'node:events';
+import { request as httpRequest } from 'node:http';
 import { createApp, ENDPOINT, validateInputs, validateResponse } from '../server.mjs';
 
 const validOutput = {
@@ -143,4 +144,52 @@ test('HTTP boundaries serve only public allowlisted files', async t => {
   const response = await fetch(`${app.base}/api/config`);
   assert.match(response.headers.get('content-security-policy'), /frame-ancestors 'none'/);
   assert.equal((await response.json()).budget.used, 0);
+});
+
+test('two server instances share one reservation lock and cannot exceed the persisted limit', async t => {
+  let entered;
+  let finish;
+  const enteredPromise = new Promise(resolve => { entered = resolve; });
+  const outputPromise = new Promise(resolve => { finish = resolve; });
+  const first = await setup(t, { maxCalls: 1, fetchImpl: async () => { entered(); return outputPromise; } });
+  let secondCalls = 0;
+  const second = await createApp({ root: first.root, maxCalls: 8, fetchImpl: async () => { secondCalls++; return Response.json(validOutput); } });
+  second.server.listen(0, '127.0.0.1');
+  await once(second.server, 'listening');
+  t.after(async () => { await new Promise(resolve => second.server.close(resolve)); });
+  const secondPost = () => fetch(`http://127.0.0.1:${second.server.address().port}/api/verify`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request),
+  });
+  const pending = first.post(request);
+  await enteredPromise;
+  assert.equal((await secondPost()).status, 409);
+  finish(Response.json(validOutput));
+  assert.equal((await pending).status, 200);
+  assert.equal((await secondPost()).status, 429);
+  assert.equal(secondCalls, 0);
+  assert.equal(second.budget().limit, 1);
+  const ledger = JSON.parse(await readFile(path.join(first.root, 'receipts/call-ledger.json'), 'utf8'));
+  assert.equal(ledger.calls.length, 1);
+  assert.equal(ledger.calls[0].outcome, 'success');
+});
+
+test('a slow request body cannot bypass a provider-access stop applied while it is uploading', async t => {
+  let calls = 0;
+  const app = await setup(t, { fetchImpl: async () => { calls++; return Response.json({ error: 'access stopped' }, { status: 403 }); } });
+  const requestSeen = once(app.server, 'request');
+  let slow;
+  const slowResponse = new Promise((resolve, reject) => {
+    slow = httpRequest(`${app.base}/api/verify`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked' },
+    }, response => { response.resume(); response.on('end', () => resolve(response.statusCode)); });
+    slow.on('error', reject);
+    slow.write('{"inputs":');
+  });
+  t.after(() => slow.destroy());
+  await requestSeen;
+  assert.equal((await app.post(request)).status, 502);
+  slow.end(`${JSON.stringify(request.inputs)}}`);
+  assert.equal(await slowResponse, 403);
+  assert.equal(calls, 1);
+  assert.equal(app.budget().used, 1);
 });

@@ -1,6 +1,6 @@
 # Policy Evidence Check — 100-second demo
 
-Use the local app at http://127.0.0.1:4321. The app's saved-live-run label must remain visible when replaying receipts. Do not click Verify merely to make a recording look live; five authorized calls are already recorded, with two reserved for necessary debugging.
+Use the local app at http://127.0.0.1:4321, or port 4322 if the original build server occupies 4321. The app's saved-live-run label must remain visible when replaying receipts. All eight authorized calls are recorded and the budget is exhausted; replay saved receipts only.
 
 ## 0–15 seconds: problem and actual integration
 
@@ -39,3 +39,7 @@ End on the actual result. The owner has authorized the shared public hackathon r
 ## Screenshots
 
 The screenshot set is an alternative challenge deliverable to a video, subject to the parent confirming the challenge's final submission format. Captures show the app displaying saved responses from actual endpoint calls; they are not fresh inference at capture time. Use the conflicting-records and expired-exception screenshots together so the uncertainty behavior is visible.
+
+## Optional PHP follow-up
+
+Select the three PHP cases to compare a fleet announcement, an invented asset-bound backport observation and a customer-managed VPS outside the rollout. Scope the narration to CVE-2026-109618. All actual calibrated results are unsure; the backport and VPS raw labels are violation. Explain that the backport case failed its human expectation, and do not turn a missing-proof case or secondary raw label into a claim about a real compromised website. `PHP_HOSTING_CASES.md` records sources and limits.

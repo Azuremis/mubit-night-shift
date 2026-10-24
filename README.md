@@ -14,10 +14,11 @@ npm test
 npm start
 ```
 
-Open http://127.0.0.1:4321. If that port is already in use, run `PORT=4322 npm start` and open http://127.0.0.1:4322. The server binds only to localhost. Selecting fixtures and inspecting saved receipts makes no model calls. Pressing **Verify** sends one inference request; preserve the recorded five-of-seven call ledger and its remaining debugging allowance.
+Open http://127.0.0.1:4321. If that port is already in use, run `PORT=4322 npm start` and open http://127.0.0.1:4322. The server binds only to localhost. Selecting fixtures and inspecting saved receipts makes no model calls. All **eight authorized attempts are recorded and the budget is exhausted**, so Verify is disabled. Preserve the ledger; do not reset it to make new calls.
 
 - [Validation](sidequests/policy-evidence-check/VALIDATION.md)
 - [Demo script](sidequests/policy-evidence-check/DEMO_SCRIPT.md)
+- [PHP hosting cases and attributed sources](sidequests/policy-evidence-check/PHP_HOSTING_CASES.md)
 - [Reviewed screenshots](sidequests/policy-evidence-check/screenshots/)
 - [Migration and privacy review](sidequests/policy-evidence-check/MIGRATION.md)
 

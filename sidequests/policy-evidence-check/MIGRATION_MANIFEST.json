@@ -179,5 +179,6 @@
       "migrated_sha256": "935ca924589aeb66d01ba2e3490b4e83c4bec43eee0742bba2a419ee69c99328",
       "byte_identical": true
     }
-  ]
+  ],
+  "migration_snapshot_commit": "480b15552b247790b122209a6289d0fafeb07ae8"
 }

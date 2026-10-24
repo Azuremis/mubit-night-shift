@@ -42,3 +42,27 @@ Screenshots are captured from the original local browser session. At the end of 
 - Text credential/private-path scanning and visual review of all five screenshots passed. JPEG metadata contains only a standard JFIF marker, without EXIF/GPS/comment metadata. The smoke header copy removes provider routing/request identifiers.
 
 Privacy exclusions and sanitization are documented in `MIGRATION.md`. Publication checks must confirm that only the reviewed root files and this sidequest appear in the index and history; `.gitignore` alone does not untrack data.
+
+## Bounded Astra review and fixes
+
+One Astra review inspected commit `480b15552b247790b122209a6289d0fafeb07ae8` without edits or provider calls. It found two substantive defects: independent instances could race the shared ledger, and a request awaiting its body could miss a provider-access stop applied in the meantime.
+
+The server now holds an exclusive receipt-directory lock across ledger reload, reservation, provider request and final persistence. It checks the persisted access stop and limit after reading the body while locked. Exclusive ledger initialization avoids overwriting another instance's new ledger. A lower persisted limit remains binding even if another instance has a higher configured maximum. A crash leaves a lock that blocks further calls pending inspection of the pending receipt; it does not silently resume or reset spending.
+
+Two targeted mocked tests reproduce the cross-instance budget race and slow-upload access-stop race. The final suite passed **10 tests, 0 failures**, including the original eight. No second broad review was run.
+
+## Approved PHP follow-up — exact three attempts
+
+The owner approved one attempt per new PHP fixture after the five original calls, with no tuning or retries. The ledger records this authorization and all original entries; its total cap is eight and all eight attempts are now used. The three additional provider responses were HTTP 200, `model: banyan-sapling`, `fallback_used: false`, `generated_tokens: 0`, and the same source/weights hashes as the original responses.
+
+| Fixture | Receipt | Human reference | Calibrated status | Raw label | Model ms |
+| --- | --- | --- | --- | --- | --- |
+| PHP rollout only | receipt-06-5eccb84f | insufficient_information | unsure | insufficient_information | 1091.9 |
+| PHP bound backport | receipt-07-2b877d47 | supported | unsure | violation | 1099.5 |
+| PHP customer VPS | receipt-08-2c178f30 | insufficient_information | unsure | violation | 1094.4 |
+
+All three prediction sets contain all four classes. The backport case did not yield its expected supported result, and the VPS raw label differs from its human reference. These outcomes are preserved without modifying inputs or retrying. A raw violation is not a calibrated violation verdict, and none of the fixtures establishes compromise of a real site.
+
+Scope is **CVE-2026-109618 only**. Attributed public advisory context and the actual fetched CVE hash/minimal factual metadata are in `PHP_HOSTING_CASES.md` and `sources/php-hosting.json`; all asset inventories and runtime observations are invented.
+
+Final checks: all 16 JSON files parsed; all eight ledger entries match saved receipt IDs/outcomes; each PHP request matches its fixture exactly; source backup hashes remain unchanged; server/UI syntax and the text credential/private-path scan pass. The migrated browser loaded all seven cases and the eight-of-eight budget with Verify disabled. Its PHP backport case showed the saved unsure result, secondary raw violation and separately expanded supported human reference. A full-page browser capture was taken at this point. The inspected browser warning/error log was empty. No further provider calls were made for UI checks.

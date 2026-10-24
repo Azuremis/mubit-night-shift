@@ -1,7 +1,7 @@
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdir, readFile, readdir, writeFile, rename } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile, rename, open, unlink } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -68,21 +68,31 @@ async function requestJSON(req) {
   catch { throw new Error('Request body must be valid JSON.'); }
 }
 
-export async function createApp({ root = ROOT, fetchImpl = fetch, maxCalls = 7, timeoutMs = 45000 } = {}) {
+export async function createApp({ root = ROOT, fetchImpl = fetch, maxCalls = 8, timeoutMs = 45000 } = {}) {
   const receiptDir = path.join(root, 'receipts');
   await mkdir(receiptDir, { recursive: true });
   const ledgerFile = path.join(receiptDir, 'call-ledger.json');
+  const lockFile = path.join(receiptDir, '.verify.lock');
   let ledger;
   try { ledger = await readJSON(ledgerFile); }
   catch (error) {
     if (error.code !== 'ENOENT') throw error;
     ledger = { limit: maxCalls, calls: [] };
-    await atomicJSON(ledgerFile, ledger);
+    // Exclusive initialization cannot overwrite another instance's reservations.
+    try {
+      const initial = await open(ledgerFile, 'wx');
+      try { await initial.writeFile(`${JSON.stringify(ledger, null, 2)}\n`); }
+      finally { await initial.close(); }
+    } catch (creationError) {
+      if (creationError.code !== 'EEXIST') throw creationError;
+      ledger = await readJSON(ledgerFile);
+    }
   }
   if (!Array.isArray(ledger.calls)) throw new Error('Invalid call ledger. Refusing to reset inference usage.');
   let inFlight = false;
   let accessBlocked = Boolean(ledger.accessBlocked);
-  const budget = () => ({ used: ledger.calls.length, limit: maxCalls, remaining: Math.max(0, maxCalls - ledger.calls.length), inFlight, accessBlocked });
+  const callLimit = () => Math.min(maxCalls, ledger.limit ?? maxCalls);
+  const budget = () => ({ used: ledger.calls.length, limit: callLimit(), remaining: Math.max(0, callLimit() - ledger.calls.length), inFlight, accessBlocked });
   const allowedOrigin = origin => /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin);
 
   async function listReceipts() {
@@ -114,29 +124,41 @@ export async function createApp({ root = ROOT, fetchImpl = fetch, maxCalls = 7, 
         if (!String(req.headers['content-type'] || '').startsWith('application/json')) return sendJSON(res, 415, { error: 'Use application/json.' });
         if (inFlight) return sendJSON(res, 409, { error: 'A verification is already running.', budget: budget() });
         if (accessBlocked) return sendJSON(res, 403, { error: 'Provider access requires review. Live requests are stopped.', budget: budget() });
-        if (ledger.calls.length >= maxCalls) return sendJSON(res, 429, { error: 'The authorized seven-call budget is exhausted.', budget: budget() });
+        if (ledger.calls.length >= callLimit()) return sendJSON(res, 429, { error: 'The authorized call budget is exhausted.', budget: budget() });
         const body = await requestJSON(req);
         let request;
         try { request = validateInputs(body); }
         catch (error) { return sendJSON(res, 400, { error: error.message }); }
         // Recheck after the asynchronous body read, before reserving the call.
         if (inFlight) return sendJSON(res, 409, { error: 'A verification is already running.', budget: budget() });
-        if (ledger.calls.length >= maxCalls) return sendJSON(res, 429, { error: 'The authorized seven-call budget is exhausted.', budget: budget() });
+        let lock;
+        try { lock = await open(lockFile, 'wx'); }
+        catch (error) {
+          if (error.code === 'EEXIST') return sendJSON(res, 409, { error: 'Another verification holds the receipt-directory lock. If a process stopped unexpectedly, inspect its pending receipt before clearing the lock.', budget: budget() });
+          throw error;
+        }
         inFlight = true;
-        const callNumber = ledger.calls.length + 1;
-        const id = `receipt-${String(callNumber).padStart(2, '0')}-${randomUUID().slice(0, 8)}`;
-        const createdAt = new Date().toISOString();
-        const receipt = {
-          id, callNumber, createdAt,
-          fixtureId: typeof body.fixtureId === 'string' ? body.fixtureId.slice(0, 80) : null,
-          request,
-          provenance: { endpoint: ENDPOINT, source: SOURCE, attempts: 1 },
-          outcome: 'pending', response: null,
-        };
-        const receiptFile = path.join(receiptDir, `${id}.json`);
-        const entry = { callNumber, receiptId: id, createdAt, outcome: 'pending' };
-        ledger.calls.push(entry);
         try {
+          // Hold the shared lock through reservation, provider response and final save.
+          // Reload only while locked so another instance cannot overwrite the budget.
+          ledger = await readJSON(ledgerFile);
+          if (!Array.isArray(ledger.calls)) throw new Error('Invalid call ledger. Refusing to reset inference usage.');
+          accessBlocked = Boolean(ledger.accessBlocked);
+          if (accessBlocked) return sendJSON(res, 403, { error: 'Provider access requires review. Live requests are stopped.', budget: budget() });
+          if (ledger.calls.length >= callLimit()) return sendJSON(res, 429, { error: 'The authorized call budget is exhausted.', budget: budget() });
+          const callNumber = ledger.calls.length + 1;
+          const id = `receipt-${String(callNumber).padStart(2, '0')}-${randomUUID().slice(0, 8)}`;
+          const createdAt = new Date().toISOString();
+          const receipt = {
+            id, callNumber, createdAt,
+            fixtureId: typeof body.fixtureId === 'string' ? body.fixtureId.slice(0, 80) : null,
+            request,
+            provenance: { endpoint: ENDPOINT, source: SOURCE, attempts: 1 },
+            outcome: 'pending', response: null,
+          };
+          const receiptFile = path.join(receiptDir, `${id}.json`);
+          const entry = { callNumber, receiptId: id, createdAt, outcome: 'pending' };
+          ledger.calls.push(entry);
           // Persist the reservation before any network call; failed attempts still count.
           await atomicJSON(ledgerFile, ledger);
           await atomicJSON(receiptFile, receipt);
@@ -171,7 +193,11 @@ export async function createApp({ root = ROOT, fetchImpl = fetch, maxCalls = 7, 
           await atomicJSON(receiptFile, receipt);
           await atomicJSON(ledgerFile, ledger);
           return sendJSON(res, receipt.outcome === 'success' ? 200 : 502, { receipt, budget: { ...budget(), inFlight: false } });
-        } finally { inFlight = false; }
+        } finally {
+          inFlight = false;
+          await lock.close();
+          await unlink(lockFile);
+        }
       }
       if (req.method !== 'GET' && req.method !== 'HEAD') return sendJSON(res, 405, { error: 'Method not allowed.' });
       const staticFiles = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/style.css': ['style.css', 'text/css'] };

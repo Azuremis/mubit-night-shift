@@ -1,5 +1,5 @@
 {
-  "limit": 7,
+  "limit": 8,
   "calls": [
     {
       "callNumber": 1,
@@ -30,6 +30,38 @@
       "receiptId": "receipt-05-8da8abe2",
       "createdAt": "2026-10-24T07:48:20.311Z",
       "outcome": "success"
+    },
+    {
+      "callNumber": 6,
+      "receiptId": "receipt-06-5eccb84f",
+      "createdAt": "2026-10-24T08:13:33.490Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 7,
+      "receiptId": "receipt-07-2b877d47",
+      "createdAt": "2026-10-24T08:13:35.003Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 8,
+      "receiptId": "receipt-08-2c178f30",
+      "createdAt": "2026-10-24T08:13:36.206Z",
+      "outcome": "success"
+    }
+  ],
+  "authorizations": [
+    {
+      "date": "2026-10-24",
+      "prior_used": 5,
+      "additional_attempts": 3,
+      "total_limit": 8,
+      "scope": "Exactly one attempt for each synthetic PHP fixture; no retries or tuning",
+      "fixture_ids": [
+        "php-rollout-only",
+        "php-bound-backport",
+        "php-customer-vps"
+      ]
     }
   ]
 }
