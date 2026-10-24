@@ -1,0 +1,148 @@
+{
+  "frozenFixturesSha256": "9b36f1c2df9181aacf670d3743285ee789535b7351d3ff8f896fd0a567e65179",
+  "results": [
+    {
+      "fixtureId": "deployment-approved",
+      "humanReference": "supported",
+      "receiptId": "receipt-09-7526370d",
+      "outcome": "success",
+      "localHttpStatus": 200,
+      "providerHttpStatus": 200,
+      "status": "unsure",
+      "rawLabel": "supported",
+      "predictionSet": [
+        "supported",
+        "violation",
+        "insufficient_information",
+        "inconsistent_context"
+      ],
+      "calibrationMetadata": {
+        "status_provenance": "multiple_conformal_labels",
+        "conformal_prediction_set": [
+          "supported",
+          "violation",
+          "insufficient_information",
+          "inconsistent_context"
+        ],
+        "conformal_singleton": false,
+        "empty_set_policy": "rounded_argmax",
+        "fallback_used": false,
+        "fallback_reason": null
+      },
+      "probabilities": {
+        "supported": 0.8521922580955693,
+        "violation": 0.01993071508966634,
+        "insufficient_information": 0.12234454450844724,
+        "inconsistent_context": 0.005532482306317226
+      },
+      "modelMs": 1033.0069740011822
+    },
+    {
+      "fixtureId": "deployment-rejected",
+      "humanReference": "violation",
+      "receiptId": "receipt-10-57703127",
+      "outcome": "success",
+      "localHttpStatus": 200,
+      "providerHttpStatus": 200,
+      "status": "violation",
+      "rawLabel": "violation",
+      "predictionSet": [
+        "violation"
+      ],
+      "calibrationMetadata": {
+        "status_provenance": "conformal_singleton",
+        "conformal_prediction_set": [
+          "violation"
+        ],
+        "conformal_singleton": true,
+        "empty_set_policy": "rounded_argmax",
+        "fallback_used": false,
+        "fallback_reason": null
+      },
+      "probabilities": {
+        "supported": 0.0014240592142766878,
+        "violation": 0.9957127103399388,
+        "insufficient_information": 0.002687198373285964,
+        "inconsistent_context": 0.00017603207249856256
+      },
+      "modelMs": 1028.8681489982991
+    },
+    {
+      "fixtureId": "deployment-missing-approval",
+      "humanReference": "insufficient_information",
+      "receiptId": "receipt-11-40fdad1a",
+      "outcome": "success",
+      "localHttpStatus": 200,
+      "providerHttpStatus": 200,
+      "status": "unsure",
+      "rawLabel": "violation",
+      "predictionSet": [
+        "supported",
+        "violation",
+        "insufficient_information",
+        "inconsistent_context"
+      ],
+      "calibrationMetadata": {
+        "status_provenance": "multiple_conformal_labels",
+        "conformal_prediction_set": [
+          "supported",
+          "violation",
+          "insufficient_information",
+          "inconsistent_context"
+        ],
+        "conformal_singleton": false,
+        "empty_set_policy": "rounded_argmax",
+        "fallback_used": false,
+        "fallback_reason": null
+      },
+      "probabilities": {
+        "supported": 0.054120854709502994,
+        "violation": 0.7882554083183595,
+        "insufficient_information": 0.10838279255762118,
+        "inconsistent_context": 0.04924094441451624
+      },
+      "modelMs": 1023.5365859989543
+    },
+    {
+      "fixtureId": "deployment-conflicting-approvals",
+      "humanReference": "inconsistent_context",
+      "receiptId": "receipt-12-4b4880cc",
+      "outcome": "success",
+      "localHttpStatus": 200,
+      "providerHttpStatus": 200,
+      "status": "inconsistent_context",
+      "rawLabel": "inconsistent_context",
+      "predictionSet": [
+        "inconsistent_context"
+      ],
+      "calibrationMetadata": {
+        "status_provenance": "conformal_singleton",
+        "conformal_prediction_set": [
+          "inconsistent_context"
+        ],
+        "conformal_singleton": true,
+        "empty_set_policy": "rounded_argmax",
+        "fallback_used": false,
+        "fallback_reason": null
+      },
+      "probabilities": {
+        "supported": 0.00017368966641662103,
+        "violation": 0.001094212983245569,
+        "insufficient_information": 0.00040049812393971217,
+        "inconsistent_context": 0.9983315992263981
+      },
+      "modelMs": 1038.5857219989703
+    }
+  ],
+  "globalBudget": {
+    "used": 12,
+    "limit": 12,
+    "remaining": 0,
+    "inFlight": false,
+    "accessBlocked": false
+  },
+  "allUnsure": false,
+  "modelParametersChanged": false,
+  "additionalAttempts": 4,
+  "decision": "Report actual distinctions to the parent for a decision before changing the active UI."
+}

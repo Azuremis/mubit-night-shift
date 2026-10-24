@@ -48,6 +48,30 @@
       "receiptId": "receipt-08-2c178f30",
       "createdAt": "2026-10-24T08:13:36.206Z",
       "outcome": "success"
+    },
+    {
+      "callNumber": 9,
+      "receiptId": "receipt-09-7526370d",
+      "createdAt": "2026-10-24T08:29:36.231Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 10,
+      "receiptId": "receipt-10-57703127",
+      "createdAt": "2026-10-24T08:29:37.674Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 11,
+      "receiptId": "receipt-11-40fdad1a",
+      "createdAt": "2026-10-24T08:29:38.803Z",
+      "outcome": "success"
+    },
+    {
+      "callNumber": 12,
+      "receiptId": "receipt-12-4b4880cc",
+      "createdAt": "2026-10-24T08:29:39.921Z",
+      "outcome": "success"
     }
   ],
   "authorizations": [
@@ -81,6 +105,6 @@
     "path": "../../receipts/call-ledger.json",
     "sha256": "856b0116cd498c05877704a4ab66e4b283e7da88592a57aa9ac29b085dca9dee",
     "count": 8,
-    "note": "Calls 1\u20138 remain in the primary receipts directory; this distinct diagnostic directory holds calls 9\u201312 only."
+    "note": "Calls 1–8 remain in the primary receipts directory; this distinct diagnostic directory holds calls 9–12 only."
   }
 }

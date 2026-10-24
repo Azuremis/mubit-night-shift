@@ -1,3 +1,7 @@
 receipts/*
 !receipts/call-ledger.json
 *.log
+!receipts/receipt-09-7526370d.json
+!receipts/receipt-10-57703127.json
+!receipts/receipt-11-40fdad1a.json
+!receipts/receipt-12-4b4880cc.json
