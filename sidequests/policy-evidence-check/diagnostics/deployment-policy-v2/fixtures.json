@@ -1,0 +1,20 @@
+[
+  {
+    "id": "deployment-v2-approved",
+    "title": "Policy v2 \u00b7 approved",
+    "expected": "supported",
+    "policy": "Policy v2 is the complete permission rule for this synthetic release; no other approval rules apply. The designated release owner is owner-01. Release r-42 is permitted for production deployment if and only if owner-01 explicitly approves r-42, all required tests for r-42 have status PASS, and the complete approval record has no conflicting decision for r-42. When all three conditions hold, deployment is permitted under this policy. An explicit rejection by owner-01 forbids deployment even if tests pass. Missing approval or missing test evidence leaves permission unestablished and requires human review; missing evidence is not an explicit rejection. Equally authoritative approval and rejection for the same release and snapshot, with no precedence, are inconsistent context and require conflict resolution before permission.",
+    "evidence": "SYNTHETIC COMPLETE RELEASE PACKET\nrelease: r-42\nsnapshot: 2026-10-24T09:00:00Z\ndesignated release owner: owner-01\ncomplete approval record: owner-01 explicitly APPROVED r-42 for production deployment\nrequired tests: test-01=PASS; test-02=PASS\nconflicting approval decisions: none\nThis packet lists every required test and every approval decision for this release at the snapshot. No other records or rules exist in this synthetic scenario.",
+    "claim": "Under this complete policy, release r-42 is permitted for production deployment.",
+    "version": 2
+  },
+  {
+    "id": "deployment-v2-rejected",
+    "title": "Policy v2 \u00b7 rejected",
+    "expected": "violation",
+    "policy": "Policy v2 is the complete permission rule for this synthetic release; no other approval rules apply. The designated release owner is owner-01. Release r-42 is permitted for production deployment if and only if owner-01 explicitly approves r-42, all required tests for r-42 have status PASS, and the complete approval record has no conflicting decision for r-42. When all three conditions hold, deployment is permitted under this policy. An explicit rejection by owner-01 forbids deployment even if tests pass. Missing approval or missing test evidence leaves permission unestablished and requires human review; missing evidence is not an explicit rejection. Equally authoritative approval and rejection for the same release and snapshot, with no precedence, are inconsistent context and require conflict resolution before permission.",
+    "evidence": "SYNTHETIC COMPLETE RELEASE PACKET\nrelease: r-42\nsnapshot: 2026-10-24T09:00:00Z\ndesignated release owner: owner-01\ncomplete approval record: owner-01 explicitly REJECTED r-42 for production deployment\nrequired tests: test-01=PASS; test-02=PASS\nconflicting approval decisions: none\nThis packet lists every required test and every approval decision for this release at the snapshot. No other records or rules exist in this synthetic scenario.",
+    "claim": "Under this complete policy, release r-42 is permitted for production deployment.",
+    "version": 2
+  }
+]
